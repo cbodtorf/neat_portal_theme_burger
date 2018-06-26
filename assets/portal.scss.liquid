@@ -1,8 +1,26 @@
+// Variables
+$color--font: #464648;
+$color--neat-green: #017F7B;
+
 // base
 body {
   font-family: Europa, sans-serif;
   font-size: 20px;
   line-height: 1.3;
+}
+li {
+  list-style: none;
+}
+svg.icon:not(.icon--full-color) circle, svg.icon:not(.icon--full-color) ellipse, svg.icon:not(.icon--full-color) g, svg.icon:not(.icon--full-color) line, svg.icon:not(.icon--full-color) path, svg.icon:not(.icon--full-color) polygon, svg.icon:not(.icon--full-color) polyline, svg.icon:not(.icon--full-color) rect, symbol.icon:not(.icon--full-color) circle, symbol.icon:not(.icon--full-color) ellipse, symbol.icon:not(.icon--full-color) g, symbol.icon:not(.icon--full-color) line, symbol.icon:not(.icon--full-color) path, symbol.icon:not(.icon--full-color) polygon, symbol.icon:not(.icon--full-color) polyline, symbol.icon:not(.icon--full-color) rect {
+    fill: inherit;
+    stroke: inherit;
+}
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  fill: currentColor;
 }
 
 // mixin
@@ -89,7 +107,7 @@ input[type="checkbox"] {
     text-transform: uppercase;
     letter-spacing: 1.05px;
     line-height: 20px;
-    color: #017F7B
+    color: $color--neat-green
 }
 
 .profile-subnav .profile-subnav-label:after {
@@ -127,7 +145,7 @@ input[type="checkbox"] {
     text-transform: uppercase;
     letter-spacing: 1.85px;
     line-height: 22px;
-    color: #868686;
+    color: $color--font;
     text-align: center
 }
 
@@ -136,8 +154,8 @@ input[type="checkbox"] {
     top: 18px;
     right: 20px;
     font-weight: normal;
-    color: #017F7B;
-    border-bottom: 1px solid #017F7B;
+    color: $color--neat-green;
+    border-bottom: 1px solid $color--neat-green;
     opacity: 1;
     animation-name: activeFlyIn;
     animation-duration: 0.4s;
@@ -149,12 +167,12 @@ input[type="checkbox"] {
 @media (min-width: 768px) {
     .profile-subnav {
         padding: 18px 0px 25px;
-        max-height: auto;
+        max-height: none;
         border-bottom-color: #bfbfbf;
         text-align: center;
         animation: none;
-        border-bottom: 1px solid #017F7B;
-        border-top: 1px solid #017F7B;
+        border-bottom: 1px solid $color--neat-green;
+        border-top: 1px solid $color--neat-green;
     }
 
     .profile-subnav .profile-subnav-label {
@@ -173,7 +191,7 @@ input[type="checkbox"] {
 
     .profile-subnav .profile-subnav-link.active span {
         position: static;
-        color: #017F7B;
+        color: $color--neat-green;
         animation: none
     }
 }
@@ -303,7 +321,7 @@ input[type="checkbox"] {
     letter-spacing: 0.4px;
     line-height: 26px;
     text-transform: none;
-    color: #868686
+    color: $color--font;
 }
 
 .card .card--section.-date {
@@ -349,9 +367,9 @@ input[type="checkbox"] {
     letter-spacing: 0.4px;
     line-height: 26px;
     text-transform: none;
-    color: #666666;
+    color: $color--font;
     padding-top: 25px;
-    border-top: 1px solid #017F7B;
+    border-top: 1px solid $color--neat-green;
 }
 
 .card .card--error-message {
@@ -369,13 +387,12 @@ input[type="checkbox"] {
     font-size: 12px;
     letter-spacing: 2px;
     line-height: 24px;
-    text-transform: uppercase;
-    color: #263645;
+    color: $color--font;
     padding-bottom: 8px;
 }
 .card .card--header.separator {
     padding-top: 25px;
-    border-top: 1px solid #017F7B;
+    border-top: 1px solid $color--neat-green;
 }
 
 .card .card--headline-value {
@@ -384,7 +401,7 @@ input[type="checkbox"] {
     letter-spacing: 0.9px;
     line-height: 32px;
     text-transform: none;
-    color: #263645;
+    color: $color--font;
     margin-bottom: 10px
 }
 
@@ -464,7 +481,7 @@ input[type="checkbox"] {
     letter-spacing: 0.4px;
     line-height: 20px;
     text-transform: none;
-    color: #868686
+    color: $color--font;
 }
 
 .card-slide-animation-enter,.card-slide-animation-leave {
@@ -587,7 +604,7 @@ input[type="checkbox"] {
     letter-spacing: 0.5px;
     line-height: 24px;
     text-transform: none;
-    color: #868686
+    color: $color--font;
 }
 
 .profile .next-box-products-card .card--body .card--body-image {
@@ -705,14 +722,6 @@ input[type="checkbox"] {
     margin-bottom: 10px
 }
 
-.profile .add-products-section .products-container .product .product-name {
-    color: #666666
-}
-
-.profile .add-products-section .products-container .product .product-detail {
-    color: #868686
-}
-
 .profile .add-products-section .products-container .product a.product-more-info {
     text-decoration: underline
 }
@@ -824,7 +833,6 @@ input[type="checkbox"] {
     letter-spacing: 0.9px;
     line-height: 32px;
     text-transform: none;
-    color: #263645
 }
 
 @media (min-width: 1024px) {
@@ -841,7 +849,6 @@ input[type="checkbox"] {
     letter-spacing: 0.4px;
     line-height: 20px;
     text-transform: none;
-    color: #4e4e4e;
     margin-bottom: 14px;
     vertical-align: middle
 }
@@ -853,7 +860,6 @@ input[type="checkbox"] {
 }
 
 .profile .subheader a {
-    color: #185674;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
@@ -864,14 +870,6 @@ input[type="checkbox"] {
     margin-left: auto;
     position: relative;
     top: -2px
-}
-
-.profile .subheader a:hover {
-    color: #2a7295
-}
-
-.profile .subheader a:active {
-    color: #0b384e
 }
 
 .profile.failed-billing,.profile.your-details {
@@ -931,7 +929,6 @@ input[type="checkbox"] {
 }
 
 .profile.failed-billing .add-link,.profile.your-details .add-link {
-    color: #185674;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
@@ -941,13 +938,6 @@ input[type="checkbox"] {
     margin-top: 20px
 }
 
-.profile.failed-billing .add-link:hover,.profile.your-details .add-link:hover {
-    color: #2a7295
-}
-
-.profile.failed-billing .add-link:active,.profile.your-details .add-link:active {
-    color: #0b384e
-}
 
 .profile.failed-billing .shave-plan-address-label,.profile.your-details .shave-plan-address-label {
     font-weight: 500;
@@ -955,12 +945,10 @@ input[type="checkbox"] {
     letter-spacing: 0.5px;
     line-height: 24px;
     text-transform: none;
-    color: #3ca6e0;
     margin-top: 4px
 }
 
 .profile.failed-billing .cancel-link,.profile.your-details .cancel-link {
-    color: #185674;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
@@ -970,13 +958,6 @@ input[type="checkbox"] {
     color: #e34f30
 }
 
-.profile.failed-billing .cancel-link:hover,.profile.your-details .cancel-link:hover {
-    color: #2a7295
-}
-
-.profile.failed-billing .cancel-link:active,.profile.your-details .cancel-link:active {
-    color: #0b384e
-}
 
 .profile.failed-billing .cancel-link:hover,.profile.failed-billing .cancel-link:active,.profile.your-details .cancel-link:hover,.profile.your-details .cancel-link:active {
     color: #e34f30;
@@ -1031,7 +1012,6 @@ input[type="checkbox"] {
 }
 
 .profile.neat-plan-home .cancel-link {
-    color: #185674;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
@@ -1039,22 +1019,13 @@ input[type="checkbox"] {
     text-transform: none;
     text-decoration: underline
 }
-
-.profile.neat-plan-home .cancel-link:hover {
-    color: #2a7295
-}
-
-.profile.neat-plan-home .cancel-link:active {
-    color: #0b384e
-}
-
 .profile.neat-plan-home .card--body .date-display {
     font-weight: 500;
     font-size: 24px;
     letter-spacing: 0.9px;
     line-height: 32px;
     text-transform: none;
-    color: #263645
+    color: $color--font;
 }
 
 @media (min-width: 1024px) {
@@ -1100,7 +1071,6 @@ input[type="checkbox"] {
     line-height: 24px;
     text-transform: none;
     align-items: center;
-    color: #868686;
     display: flex
 }
 
@@ -1152,7 +1122,6 @@ input[type="checkbox"] {
     letter-spacing: 2px;
     line-height: 24px;
     text-transform: uppercase;
-    color: #666666;
     display: flex;
     justify-content: flex-end
 }
@@ -1181,7 +1150,6 @@ input[type="checkbox"] {
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-    color: #666666;
 
     opacity: 0;
     z-index: -1;
@@ -1206,7 +1174,6 @@ input[type="checkbox"] {
     letter-spacing: 2px;
     line-height: 24px;
     text-transform: uppercase;
-    color: #263645;
     margin-bottom: 5px
 }
 
@@ -1256,10 +1223,6 @@ input[type="checkbox"] {
     text-transform: uppercase
 }
 
-.pricing-tooltip-container .pricing-tooltip .totals table tr:last-child {
-    color: #263645
-}
-
 .pricing-tooltip-container .pricing-tooltip .totals table tr:last-child td:last-child {
     font-weight: bold
 }
@@ -1278,21 +1241,12 @@ input[type="checkbox"] {
 }
 
 .referral-discount-link {
-    color: #185674;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
     line-height: 24px;
     text-transform: none;
     text-decoration: underline
-}
-
-.referral-discount-link:hover {
-    color: #2a7295
-}
-
-.referral-discount-link:active {
-    color: #0b384e
 }
 
 .card {
@@ -1410,7 +1364,6 @@ input[type="checkbox"] {
   letter-spacing: 0.4px;
   line-height: 20px;
   text-transform: none;
-  color: #666666;
   transition: opacity 0.2s ease;
   height: 100%;
   display: flex;
@@ -1435,7 +1388,6 @@ input[type="checkbox"] {
   line-height: 32px;
   text-transform: none;
   margin-bottom: 35px;
-  color: #263645;
 }
 .drawer-body .drawer-header h2 {
   flex: 1;
@@ -1451,19 +1403,20 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   padding-bottom: 15px;
-  border-bottom: 1px #017F7B solid;
+  border-bottom: 1px $color--neat-green solid;
 }
 .drawer-header h2 .header-content>span {
   flex: 1;
-  color: #017F7B;
+  color: $color--neat-green;
 }
 .drawer-header h2 .header-content .header-location {
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 2px;
   line-height: 24px;
-  color: #263645;
   padding-bottom: 8px;
+  color: initial;
+  margin-top: 25px;
 }
 .drawer-body .drawer-header .back-button, .drawer-body .drawer-header .close-button {
   flex: 0 0 auto;
@@ -1515,7 +1468,8 @@ input[type="checkbox"] {
   top: 0;
   right: -550px;
   z-index: 1100;
-  width: 550px;
+  width: 100%;
+  max-width: 550px;
   height: 100%;
   background: #f2f2f2;
   -webkit-transition: right .4s;
@@ -1543,7 +1497,6 @@ input[type="checkbox"] {
   transition: right .4s;
 }
 .app-wrapper {
-  // background-color: #f7f7f7;
   height: 100%;
 }
 .content-wrapper {
@@ -1651,13 +1604,12 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     height: 55px;
-    border-top: 2px #017F7B solid;
+    border-top: 2px $color--neat-green solid;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 2px;
     line-height: 24px;
     text-transform: uppercase;
-    color: #263645;
     text-align: center
 }
 
@@ -1758,7 +1710,7 @@ input[type="checkbox"] {
   }
 
   .form .form--field,.form .form--field+.form--field {
-    border: 1px #017F7B solid
+    border: 1px $color--neat-green solid
   }
 
   .form .form--field {
@@ -1961,7 +1913,7 @@ input[type="checkbox"] {
   align-items: baseline;
 }
 .address-container label {
-  color: #017F7B;
+  color: $color--neat-green;
   font-size: 1.5em;
   font-weight: bold;
   letter-spacing: 2px;
@@ -1978,7 +1930,7 @@ input[type="checkbox"] {
   padding-right: 35px;
 
   /* Styles */
-  background: #017F7B;
+  background: $color--neat-green;
   border-radius: 25px;
   cursor: pointer;
   outline: none;
@@ -2011,7 +1963,7 @@ input[type="checkbox"] {
   /* Styles */
   background-color: #fafafa;
   border-radius: 8px;
-  border: 1px solid #017F7B;
+  border: 1px solid $color--neat-green;
   font-weight: normal;
   transition: all 0.2s ease-in;
   list-style: none;
@@ -2028,10 +1980,9 @@ input[type="checkbox"] {
 .wrapper-dropdown .dropdown li a {
   display: block;
   text-decoration: none;
-  color: #333;
   padding: 10px;
   transition: all 0.3s ease-out;
-  border-bottom: 1px solid #017F7B;
+  border-bottom: 1px solid $color--neat-green;
 }
 
 .wrapper-dropdown .dropdown li:last-of-type a {
@@ -2047,13 +1998,13 @@ input[type="checkbox"] {
 /* Hover state */
 
 .wrapper-dropdown .dropdown li:hover a {
-  color: #017F7B;
+  color: $color--neat-green;
 }
 
 /* Active state */
 
 .wrapper-dropdown.active {
-  background: #017F7B;
+  background: $color--neat-green;
   box-shadow: none;
   border-bottom: none;
   color: white;
@@ -2092,7 +2043,7 @@ input[type="checkbox"] {
   right: 13px;
   border-width: 0 8px 8px 8px;
   border-style: solid;
-  border-color: #017F7B transparent;
+  border-color: $color--neat-green transparent;
 }
 
 .add-cta {
@@ -2105,7 +2056,7 @@ input[type="checkbox"] {
 }
 
 .section-title, .date-text {
-  color: #017F7B;
+  color: $color--neat-green;
   font-weight: 600;
 }
 
@@ -2124,11 +2075,11 @@ input[type="checkbox"] {
   }
 
   .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
-    background: #017F7B;
+    background: $color--neat-green;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #fff;
-    border-color: #017F7B;
+    border-color: $color--neat-green;
   }
 
   .flatpickr-months .flatpickr-prev-month.flatpickr-prev-month, .flatpickr-months .flatpickr-next-month.flatpickr-prev-month {
@@ -2144,7 +2095,7 @@ input[type="checkbox"] {
   }
 
   .flatpickr-months .flatpickr-prev-month:hover svg, .flatpickr-months .flatpickr-next-month:hover svg {
-    fill: #017F7B;
+    fill: $color--neat-green;
   }
 }
 
@@ -2157,20 +2108,21 @@ input[type="checkbox"] {
 }
 .btn.btn-secondary {
   background: transparent;
-  border: 1px solid #017F7B;
-  color: #017F7B;
+  border: 1px solid $color--neat-green;
+  color: $color--neat-green;
   font-weight: 600;
   border-radius: 50px;
-  padding: 4px 35px;
-  margin: 7px;
+  margin: 10px 0px 10px 0px;
+  padding: 8px 62px 8px 28px;
 }
 
 .btn-wrapper {
   width: 100%;
   text-align: center;
   margin-top: 40px;
+  font-size: 12px;
 
-  .add-product {
+  .add-product, .swap-product {
     width: auto;
   }
 }
@@ -2181,10 +2133,23 @@ input[type="checkbox"] {
   background: #ffd859;
   border-radius: 50px;
   width: 100%;
-  padding: 5px 15px;
+  padding: 8px 62px 8px 28px;
+  margin: 10px 0px 10px 0px;
   border: none;
   letter-spacing: 1.5px;
 }
+
+.btn.disabled {
+  color: #666666;
+  border-color: #666666;
+  padding: 8px 28px;
+
+  &:after {
+    display: none;
+  }
+}
+
+
 
 // Your subscription card
 .card.product-card {
@@ -2193,7 +2158,7 @@ input[type="checkbox"] {
 
   .section-title {
     font-weight: bold;
-    color: #017F7B;
+    color: $color--neat-green;
   }
 
   button.add-product, button.swap-product {
@@ -2208,10 +2173,10 @@ input[type="checkbox"] {
   }
 }
 .card.product-card.-selected {
-  border: 1px solid #017F7B;
+  border: 1px solid $color--neat-green;
 
   button.add-product, button.swap-product {
-    display: block;
+    display: inline-block;
   }
   button.choose-variant {
     display: none;
@@ -2221,7 +2186,7 @@ input[type="checkbox"] {
   opacity: 1;
 }
 .card.product-card:hover, .card.product-card:focus-within {
-  border: 1px solid #017F7B;
+  border: 1px solid $color--neat-green;
 }
 
 .subscription-display .icon.icon--full {
@@ -2230,7 +2195,6 @@ input[type="checkbox"] {
 }
 .drawer-content .subscription-display {
   margin-bottom: 5px;
-  color: #263645;
   font-size: 16px;
 }
 .drawer-content .subscription-frequency {
@@ -2272,15 +2236,15 @@ input[type="radio"] {
 }
 
 .radio-selector--container .radio-selector--label:hover .radio-selector--icon {
-    border: 1px #017F7B solid;
+    border: 1px $color--neat-green solid;
 }
 
 .radio-selector--container .radio-selector--label.-selected .radio-selector--icon {
     background-color: #fff;
-    border: 1px #017F7B solid;
+    border: 1px $color--neat-green solid;
 }
 .radio-selector--container .radio-selector--label.-selected .radio-selector--icon svg {
-    fill: #017F7B;
+    fill: $color--neat-green;
     width: 24px;
     height: 24px;
     position: relative;
@@ -2311,7 +2275,6 @@ input[type="radio"] {
     letter-spacing: 0.5px;
     line-height: 28px;
     text-transform: none;
-    color: #666666
 }
 
 // Address form
@@ -2323,10 +2286,10 @@ input[type="radio"] {
 .edit-address-link {
   padding-top: 20px;
   margin-top: 40px;
-  border-top: 1px solid #017F7B;
+  border-top: 1px solid $color--neat-green;
 
   a {
-    color: #017F7B;
+    color: $color--neat-green;
     text-decoration: underline;
     font-size: 14px;
     letter-spacing: 1.3px;
@@ -2339,7 +2302,7 @@ input[type="radio"] {
    .card--header {
      font-size: 18px;
      font-weight: 600;
-     color: #017F7B;
+     color: $color--neat-green;
    }
    .address-nickname {
      font-size: 16px;
@@ -2362,7 +2325,7 @@ input[type="radio"] {
   top: 50%;
   transform: translateY(-50%);
   transition: 0.1s transform linear;
-  color: #017F7B;
+  color: $color--neat-green;
   text-decoration: underline;
   font-weight: 400;
 }
@@ -2393,13 +2356,13 @@ input[type="radio"] {
     }
   }
   .td--underline {
-    border-bottom: solid 1px #017F7B !important;
+    border-bottom: solid 1px $color--neat-green !important;
   }
 }
 
 .styled-link {
   transition: 0.1s transform linear;
-  color: #017F7B;
+  color: $color--neat-green;
   text-decoration: underline;
   font-weight: 400;
   cursor: pointer;
@@ -2419,4 +2382,29 @@ input[type="radio"] {
   padding-bottom: 128%;
   border-radius: 8px;
   height: 100%;
+}
+
+
+// next box charges
+.card.future-box-dates {
+  background-color: transparent;
+  border-radius: 0;
+  border-top: 1px solid $color--neat-green;
+
+  .charge-title {
+    font-weight: 600;
+  }
+
+  .title-date, .skip-charge {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .charge {
+      display: inline-table;
+      width: 100%;
+      border-bottom: 1px solid $color--neat-green;
+      padding: 15px;
+  }
 }

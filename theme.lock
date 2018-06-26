@@ -33,6 +33,8 @@ assets/cafe_menu.jpg:
   dev_cb: 2018-06-26T15:03:46-04:00   0c9d1289addf56ab6cf44e43570bba46
 assets/cafe_page__1.jpg:
   dev_cb: 2018-06-26T15:03:46-04:00   eaa4b2dfa0d8747ca9f141d753297d5c
+assets/caret-right.svg:
+  dev_cb: 2018-06-26T15:11:52-04:00   cbbde0ff387cc6490ff2e9a7d5d09127
 assets/cat_tm.jpg:
   dev_cb: 2018-06-26T15:03:47-04:00   c2ddcb8dc7c4c49296c1d7609414e551
 assets/cfi_1.jpg:
@@ -253,6 +255,8 @@ assets/period-image-3.png:
   dev_cb: 2018-06-26T15:04:18-04:00   8749957ac17b24e1f7ebca7705506f4f
 assets/pjones.jpg:
   dev_cb: 2018-06-26T15:04:18-04:00   f3edca9723e86e502c12b72d70a350b2
+assets/portal.scss.liquid:
+  dev_cb: 2018-06-26T17:43:27-04:00   d7b2d87410ab7ec60a6733d61b3a9d5a
 assets/prodBlurb.jpg:
   dev_cb: 2018-06-26T15:04:18-04:00   3dee12e1ddbb8b1d83c298928cbd8704
 assets/prodBlurb.png:
@@ -382,7 +386,7 @@ assets/whey_production.jpg:
 config/settings_schema.json:
   dev_cb: 2018-06-26T15:04:38-04:00   ab32005f18d4c20372bc5c3ca59bcfa3
 layout/theme.liquid:
-  dev_cb: 2018-06-26T15:04:35-04:00   87e65ab19e6bdf29066c38263b4afaa9
+  dev_cb: 2018-06-26T15:15:05-04:00   683a2a93de3eaec2ec9609f9d6d053d3
 locales/en.default.json:
   dev_cb: 2018-06-26T15:04:36-04:00   a0bb8cb6beae580947af6cba01dcf6b8
 sections/footer.liquid:
@@ -444,11 +448,17 @@ snippets/recharge-header.liquid:
 snippets/related-products.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   dead64ee88bcd97efba07790fe15c0b8
 snippets/settings.liquid:
-  dev_cb: 2018-06-26T15:04:37-04:00   cd226254ab5970f154cf0591bf36f31e
+  dev_cb: 2018-06-26T15:15:46-04:00   ea03dd7c36ea1e27de021341c785f406
 snippets/social-meta-tags.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   ce1e77f646a153076dfbffc7d974dea9
 snippets/socials.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   4c79025c464e87dbc6a4851213f03430
+snippets/subscription-cart-footer.liquid:
+  dev_cb: 2018-06-26T15:14:21-04:00   e15461a3c789aeb9d5fa26c74bdd52ea
+snippets/subscription-product.liquid:
+  dev_cb: 2018-06-26T15:14:29-04:00   193734f0a99c5225f1ee529f3a66572b
+snippets/subscription-theme-footer.liquid:
+  dev_cb: 2018-06-26T15:14:37-04:00   12b2680357a3f273b47c07d9baf7252f
 templates/404.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   60236051716d7f7ccf183137d9d5b08b
 templates/article.liquid:
@@ -460,7 +470,7 @@ templates/cart.liquid:
 templates/collection.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   92f41bb7e8221a78e1f6c1aab1ba07bf
 templates/customers/account.liquid:
-  dev_cb: 2018-06-26T15:04:37-04:00   af658bf28c8a98df9e50cdc17c86f110
+  dev_cb: 2018-06-26T15:11:46-04:00   126071f0c37648066f11fb6b1c472433
 templates/customers/activate_account.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   e5d57dc4722ac160f0d31293e10ff682
 templates/customers/addresses.liquid:
@@ -468,7 +478,7 @@ templates/customers/addresses.liquid:
 templates/customers/login.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   e1f5457c6d7e03a0e942cfc25c15d1e2
 templates/customers/order.liquid:
-  dev_cb: 2018-06-26T15:04:37-04:00   ba3a6f949742d824fe425f8bf6921a0d
+  dev_cb: 2018-06-26T15:11:43-04:00   865529567279fd2b4fc99ca1b28b15a6
 templates/customers/register.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   9e0d0c85b0627211021e27ca3bee3aa8
 templates/customers/reset_password.liquid:
