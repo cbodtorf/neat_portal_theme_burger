@@ -1,0 +1,117 @@
+{%- assign _section  = section.settings -%}
+{%- assign _blocks = section.blocks -%}
+
+{%- if _section.show_for == 'member' -%}
+	{%- if customer -%}
+		{%- assign show_section = true -%}
+	{%- else -%}
+		{%- assign show_section = false -%}
+	{%- endif -%}
+{%- else -%}
+	{%- if customer -%}
+		{%- assign show_section = false -%}
+	{%- else -%}
+		{%- assign show_section = true -%}
+	{%- endif -%}
+{%- endif -%}
+
+{%- if _blocks.size > 0 and show_section -%}
+	<section class="section-features">
+		<div class="shell">
+			<div class="section__inner">
+				{%- if _section.title != blank -%}
+					<div class="section__head">
+						<h2>{{ _section.title }}</h2>
+					</div><!-- /.section__head -->
+				{%- endif -%}
+
+				<div class="section__body">
+					<ul class="features">
+						{%- for block in _blocks -%}
+							{%- assign _block = block.settings -%}
+
+							<li class="feature">
+								{%- if _block.image != blank -%}
+									<div class="feature__image">
+										{{ _block.image | img_url: '300x' | img_tag }}
+									</div><!-- /.feature__image -->
+								{%- endif -%}
+
+								{%- if _block.title != blank or _block.content != blank -%}
+									<div class="feature__content">
+										{%- if _block.title != blank -%}
+											<h3>{{ _block.title }}</h3>
+										{%- endif -%}
+
+										{%- if _block.content != blank -%}
+											<p>{{ _block.content }}</p>
+										{%- endif -%}
+									</div><!-- /.feature__content -->
+								{%- endif -%}
+							</li>
+						{%- endfor -%}
+					</ul><!-- /.features -->
+				</div><!-- /.section__body -->
+			</div><!-- /.section__inner -->
+		</div><!-- /.shell -->
+	</section><!-- /.section-features -->
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Features",
+	"settings": [
+		{
+			"type": "select",
+			"id": "show_for",
+			"label": "Show For",
+			"options": [
+		      {
+		        "value": "member",
+		        "label": "Member User"
+		      },
+		      {
+		        "value": "new",
+		        "label": "New User"
+		      }
+		    ],
+		    "default":   "new"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Section Title"
+		}
+	],
+	"max_blocks": 3,
+	"blocks": [
+		{
+			"type": "feature",
+			"name": "Feature",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "textarea",
+					"id": "content",
+					"label": "Content"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image",
+					"info": "Recommended height: 260px."
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Features"
+		}
+	]
+}
+{% endschema %}

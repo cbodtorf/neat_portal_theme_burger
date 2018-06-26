@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'settings' %}
+	{% include 'head' %}
+
+	{{ content_for_header }}
+</head>
+
+{% assign body_class = template | split: '/' | last | split: '.' | last  %}
+
+{% if body_class contains 'blog' %}
+	{% assign body_class = body_class | append : ' ' |  append: 'blog' %}
+{% elsif body_class contains 'article' %}
+	{% assign body_class = body_class | append : ' ' |  append: 'blog single single-post' %}
+{% elsif body_class contains 'collection' %}
+	{% assign body_class = body_class | append : ' ' |  append: 'archive' %}
+{% elsif body_class contains 'product' %}
+	{% assign body_class = body_class | append : ' ' |  append: 'single single-product' %}
+{% elsif template contains 'customers' %}
+	{% assign body_class = body_class | append : ' ' |  append: 'customer-templates' %}
+{% endif %}
+
+<body class="template-{{ body_class }}">
+<div class="wrapper">
+	{%- unless template == 'page.recharge' -%}
+		{% include 'header' %}
+	{%- endunless -%}
+
+	{%- if customer and template == 'index' -%}
+		{%- include 'customer-welcome' -%}
+	{%- endif -%}
+
+	{%- if template == 'page.recharge' -%}
+		{%- include 'recharge-header' -%}
+	{%- endif -%}
+
+	<div class="main">
+		{{ content_for_layout }}
+	</div><!-- /.main shell clear -->
+
+	{%- unless template == 'password' or template == 'page.recharge' -%}
+		{%- include 'newsletter' -%}
+	{%- endunless -%}
+
+	{%- unless template == 'page.recharge' -%}
+		{% section 'footer' %}
+	{%- endunless -%}
+</div><!-- /.wrapper -->
+
+{{ scripts }}
+</body>
+</html>

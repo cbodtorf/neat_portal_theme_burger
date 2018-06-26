@@ -1,0 +1,246 @@
+{%- assign _section  = section.settings -%}
+{%- assign _blocks = section.blocks -%}
+
+{%- if settings.main_navigation != blank -%}
+	{%- assign main_navigation = linklists[settings.main_navigation] -%}
+
+	<nav class="nav-mobile">
+		<ul>
+			{%- for first_level_item in main_navigation.links -%}
+				<li {% if first_level_item.links.size > 0 %} class="menu-item-has-children" {% endif %}>
+					<a href="{{ first_level_item.url }}">
+						{{ first_level_item.title }}
+					</a>
+
+					{%- if first_level_item.links.size > 0 -%}
+						<ul>
+							{%- for second_level_item in first_level_item.links -%}
+								<li {% if second_level_item.links.size > 0 %} class="menu-item-has-children" {% endif %}>
+									<a href="{{ second_level_item.url }}">
+										{{ second_level_item.title }}
+									</a>
+								</li>
+
+								{%- if second_level_item.links.size > 0 -%}
+									<ul>
+										{%- for third_level_item in second_level_item.links -%}
+											<li>
+												<a href="{{ third_level_item.url }}">
+													{{ third_level_item.title }}
+												</a>
+											</li>
+										{%- endfor -%}
+									</ul>
+								{%- endif -%}
+							{%- endfor -%}
+						</ul>
+					{%- endif -%}
+				</li>
+			{%- endfor -%}
+
+			{%- if customer -%}
+				<li>
+					<a href="/account">
+						{{ 'customer.account.title' | t }}
+					</a>
+				</li>
+			{%- else -%}
+				<li>
+					<a href="/account/login">
+						{{ 'customer.login.sign_in' | t }}
+					</a>
+				</li>
+			{%- endif -%}
+		</ul>
+	</nav><!-- /.nav -->
+{%- endif -%}
+
+<footer class="footer">
+	<div class="shell">
+		<div class="footer__content">
+			{%- if _section.nav_1 != blank or _section.nav_2 != blank or _section.nav_3 != blank -%}
+				<div class="footer__navs">
+					{%- for i in (1..3) -%}
+						{%- assign navigation_handle = 'nav_' | append: i -%}
+						{%- assign title_handle = navigation_handle | append: '_title' -%}
+
+						{%- if _section[navigation_handle] != blank -%}
+							<div class="footer__nav">
+								{%- if _section[title_handle] != blank -%}
+									<h4>{{ _section[title_handle] }}</h4>
+								{%- endif -%}
+
+								{%- include 'menu', menu_handle: _section[navigation_handle] -%}
+							</div><!-- /.footer__nav -->
+						{%- endif -%}
+					{%- endfor -%}
+				</div><!-- /.footer__navs -->
+			{%- endif -%}
+
+			{%- if _section.link_1_url != blank or _section.link_2_url != blank -%}
+				<div class="footer__contacts">
+					{%- if _section.title != blank -%}
+						<h2>{{ _section.title }}</h2>
+					{%- endif -%}
+
+					<ul class="list-icons">
+						{%- for i in (1..2) -%}
+							{%- assign link_url_handle = 'link_' | append: i | append: '_url' -%}
+							{%- assign link_title_handle = 'link_' | append: i | append: '_title' -%}
+							{%- assign link_image_handle = 'link_' | append: i | append: '_image' -%}
+
+							{%- if _section[link_url_handle] != blank -%}
+								<li>
+									<a href="{{ _section[link_url_handle] }}">
+										{%- if _section[link_image_handle] != blank -%}
+											{{ _section[link_image_handle] | img_url: '100x' | img_tag }}
+										{%- endif -%}
+									</a>
+
+									{%- if _section[link_title_handle] != blank -%}
+										<span>{{ _section[link_title_handle] }}</span>
+									{%- endif -%}
+								</li>
+							{%- endif -%}
+						{%- endfor -%}
+					</ul><!-- /.list-icons -->
+				</div><!-- /.footer__contacts -->
+			{%- endif -%}
+		</div><!-- /.footer__content -->
+
+		<div class="footer__bar">
+			{%- if _blocks.size > 0 -%}
+				<ul class="list-lang">
+					{%- for block in _blocks -%}
+						{%- assign _block = block.settings -%}
+
+						{%- if _block.link != blank and _block.icon != blank -%}
+							<li {% if forloop.first %} class="current" {% endif %}>
+								<a href="{{ _block.link }}">
+									{{ _block.icon | img_url: '60x' | img_tag }}
+								</a>
+							</li>
+						{%- endif -%}
+					{%- endfor -%}
+				</ul><!-- /.list-lang -->
+			{%- endif -%}
+
+			{%- include 'socials' -%}
+		</div><!-- /.footer__bar -->
+	</div><!-- /.shell -->
+</footer><!-- /.footer -->
+
+{% schema %}
+{
+	"name": "Footer",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Navigation 1"
+		},
+		{
+			"type": "text",
+			"id": "nav_1_title",
+			"label": "Title"
+		},
+		{
+			"type": "link_list",
+			"id": "nav_1",
+			"label": "Menu"
+		},
+		{
+			"type": "header",
+			"content": "Navigation 2"
+		},
+		{
+			"type": "text",
+			"id": "nav_2_title",
+			"label": "Title"
+		},
+		{
+			"type": "link_list",
+			"id": "nav_2",
+			"label": "Menu"
+		},
+		{
+			"type": "header",
+			"content": "Navigation 3"
+		},
+		{
+			"type": "text",
+			"id": "nav_3_title",
+			"label": "Title"
+		},
+		{
+			"type": "link_list",
+			"id": "nav_3",
+			"label": "Menu"
+		},
+		{
+			"type": "header",
+			"content": "Contact Links"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "header",
+			"content": "Link 1"
+		},
+		{
+			"type": "text",
+			"id": "link_1_title",
+			"label": "Title"
+		},
+		{
+			"type": "image_picker",
+			"id": "link_1_image",
+			"label": "Image"
+		},
+		{
+			"type": "url",
+			"id": "link_1_url",
+			"label": "Link"
+		},
+		{
+			"type": "header",
+			"content": "Icon 2"
+		},
+		{
+			"type": "text",
+			"id": "link_2_title",
+			"label": "Title"
+		},
+		{
+			"type": "image_picker",
+			"id": "link_2_image",
+			"label": "Image"
+		},
+		{
+			"type": "url",
+			"id": "link_2_url",
+			"label": "Link"
+		}
+	],
+	"blocks": [
+		{
+			"type": "language",
+			"name": "Language",
+			"settings": [
+				{
+					"type": "url",
+					"id": "link",
+					"label": "Link"
+				},
+				{
+					"type": "image_picker",
+					"id": "icon",
+					"label": "Icon"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+{%- assign _section  = section.settings -%}
+
+{%- if _section.header_bar_link != blank -%}
+	<div class="header__bar">
+		<div class="shell">
+			<p>
+				{%- if _section.desktop_message != blank -%}
+					<a href="{{ _section.header_bar_link }}" class="hidden-xs">
+						{{ _section.desktop_message }}
+					</a>
+				{%- endif -%}
+
+				{%- if _section.mobile_message != blank -%}
+					<a href="{{ _section.header_bar_link }}" class="visible-xs-block">
+						{{ _section.mobile_message }}
+					</a>
+				{%- endif -%}
+			</p>
+		</div><!-- /.shell -->
+	</div><!-- /.header__bar -->
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Header",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Header Bar"
+		},
+		{
+			"type": "url",
+			"id": "header_bar_link",
+			"label": "Header Bar Link"
+		},
+		{
+			"type": "textarea",
+			"id": "desktop_message",
+			"label": "Desktop Message"
+		},
+		{
+			"type": "textarea",
+			"id": "mobile_message",
+			"label": "Mobile Message"
+		}
+	]
+}
+{% endschema %}

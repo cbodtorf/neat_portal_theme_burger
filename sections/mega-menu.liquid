@@ -1,0 +1,84 @@
+{%- assign _blocks = section.blocks -%}
+
+<div class="header__content">
+	<div class="shell">
+		<div class="header__inner">
+			<a href="#" class="nav-trigger">
+				<span></span>
+
+				<span></span>
+
+				<span></span>
+			</a>
+
+			<a href="/" class="logo">
+				{{ 'logo-alt.png' | asset_url | img_tag }}
+			</a>
+
+			{%- if customer -%}
+				{%- if settings.main_navigation_member != blank -%}
+					{%- include 'main-menu', menu_handle: settings.main_navigation_member -%}
+				{%- endif -%}
+			{%- else -%}
+				{%- if settings.main_navigation != blank -%}
+					{%- include 'main-menu', menu_handle: settings.main_navigation -%}
+				{%- endif -%}
+			{%- endif -%}
+
+			<nav class="nav-utilities">
+				<ul>
+					{%- if customer -%}
+						<li>
+							<a href="/account">
+								{{ 'customer.account.title' | t }}
+							</a>
+						</li>
+					{%- else -%}
+						<li>
+							<a href="/account/login">
+								{{ 'customer.login.sign_in' | t }}
+							</a>
+						</li>
+					{%- endif -%}
+
+					<li>
+						<a href="#" class="cart-link">
+							{{ 'layout.cart.title' | t }} <span>{{ cart.item_count }}</span>
+						</a>
+					</li>
+				</ul>
+			</nav><!-- /.nav -->
+
+			<span class="cart-icon">
+				<a href="#" class="cart-link">
+					{{ 'ico-cart-retina.png' | asset_url | img_tag }}
+					<span>{{ cart.item_count }}</span>
+				</a>
+			</span>
+		</div><!-- /.header__inner -->
+	</div><!-- /.shell -->
+</div><!-- /.header__content -->
+
+{% schema %}
+{
+	"name": "Menu Icons",
+	"blocks": [
+		{
+			"type": "menu-item",
+			"name": "Menu Item",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Link Label"
+				},
+				{
+					"type": "image_picker",
+					"id": "icon",
+					"label": "Icon"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

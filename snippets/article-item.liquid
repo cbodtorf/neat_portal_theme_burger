@@ -1,0 +1,25 @@
+<div class="article">
+	<div class="article__inner">
+		<div class="article__body">
+			{%- if _article.image != blank -%}
+				<div class="article__image">
+					{{ _article.image | img_url: '1024x' | img_tag }}
+				</div><!-- /.article__image -->
+			{%- endif -%}
+
+			<div class="article__content">
+				<h3 class="article__title">
+					<a href="{{ _article.url }}">
+						{{ _article.title }}
+					</a>
+				</h3><!-- /.article__title -->
+
+				<p>{{ _article.excerpt }}</p>
+			</div><!-- /.article__content -->
+		</div><!-- /.article__body -->
+
+		<div class="article__foot">
+			{{ _article.published_at | date: format: 'month_day_year' }}
+		</div><!-- /.article__foot -->
+	</div><!-- /.article__inner -->
+</div><!-- /.article -->

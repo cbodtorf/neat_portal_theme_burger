@@ -1,0 +1,66 @@
+[
+  {
+    "name": "theme_info",
+    "logo": "https:\/\/cdn.shopify.com\/s\/global\/branding\/shopify_logo_256x256.png",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Base Shopify Theme"
+      },
+      {
+        "type": "paragraph",
+        "content": "This theme is fully supported by Shopify. For support and customizations, contact [theme-support@shopify.com](mailto:theme-support@shopify.com?subject=Theme+Support)."
+      }
+    ]
+  },
+  {
+    "name": "Navigation",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_navigation",
+        "label": "Main Navigation"
+      },
+      {
+        "type": "link_list",
+        "id": "main_navigation_member",
+        "label": "Main Navigation - Member"
+      }
+    ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      },
+      {
+        "type": "html",
+        "id": "embedded_form",
+        "label": "Klaviyo embedded form"
+      }
+    ]
+  },
+  {
+    "name": "Socials",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_link",
+        "label": "Instagram Link"
+      },
+      {
+        "type": "text",
+        "id": "facebook_link",
+        "label": "Facebook Link"
+      },
+      {
+        "type": "text",
+        "id": "twitter_link",
+        "label": "Twitter Link"
+      }
+    ]
+  }
+]

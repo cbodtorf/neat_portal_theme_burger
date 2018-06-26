@@ -1,0 +1,212 @@
+{%- assign _section  = section.settings -%}
+{%- assign _blocks = section.blocks -%}
+
+{%- if _section.show_for == 'member' -%}
+	{%- if customer -%}
+		{%- assign show_section = true -%}
+	{%- else -%}
+		{%- assign show_section = false -%}
+	{%- endif -%}
+{%- else -%}
+	{%- if customer -%}
+		{%- assign show_section = false -%}
+	{%- else -%}
+		{%- assign show_section = true -%}
+	{%- endif -%}
+{%- endif -%}
+
+{%- if _blocks.size > 0 and show_section -%}
+	<section class="section-accordions" {% if _section.image != blank %} style="background-image: url('{{ _section.image | img_url: '2048x' }}');" {% endif %}>
+		{%- if _section.intro_text != blank -%}
+			<div class="section__image" {% if _section.mobile_image != blank %} style="background-image: url('{{ _section.mobile_image | img_url: '1024x' }}');" {% endif %}>
+				<h2>{{ _section.intro_text }}</h2>
+			</div><!-- /.section__image -->
+		{%- endif -%}
+
+		<div class="section__images">
+			{%- if _section.top_left_image != blank -%}
+				{{ _section.top_left_image | img_url: '1024x' | img_tag: '', 'image__top-left' }}
+			{%- endif -%}
+
+			{%- if _section.top_right_image != blank -%}
+				{{ _section.top_right_image | img_url: '1024x' | img_tag: '', 'image__top-right' }}
+			{%- endif -%}
+
+			{%- if _section.bottom_left_image != blank -%}
+				{{ _section.bottom_left_image | img_url: '1024x' | img_tag: '', 'image__bottom-left' }}
+			{%- endif -%}
+
+			{%- if _section.bottom_right_image != blank -%}
+				{{ _section.bottom_right_image | img_url: '1024x' | img_tag: '', 'image__bottom-right' }}
+			{%- endif -%}
+		</div><!-- /.section__images -->
+
+		<div class="section__inner">
+			<div class="shell">
+				<div class="section__content">
+					<div class="accordion">
+
+						{%- if _section.intro_text != blank -%}
+							<header class="accordion__header">
+								<h2 class="section__title">
+									{{ _section.intro_text }}
+								</h2><!-- /.section__title -->
+							</header><!-- /.accordion__header -->
+						{%- endif -%}
+
+						<div class="accordion__body">
+							{%- for block in _blocks -%}
+								{%- assign _block = block.settings -%}
+
+								{%- if _block.title != blank and _block.content != blank -%}
+									<div class="accordion__section">
+										<div class="accordion__head">
+											<h3>
+												<a href="#">
+													{{ _block.title }}
+
+													<span></span>
+													{% comment %}<i class="fa fa-chevron-circle-down" aria-hidden="true"></i>{% endcomment %}
+												</a>
+											</h3>
+										</div><!-- /.accordion__head -->
+
+										<div class="accordion__content">
+											{%- assign accordion_array = _block.content | split: '---' -%}
+											{%- assign accordion_text = accordion_array | first -%}
+											{%- assign accordion_list = accordion_array[1] | newline_to_br | split: '<br />' -%}
+											{%- assign accordion_text_small = accordion_array[2] -%}
+
+											{%- if accordion_text != blank -%}
+												<p>{{ accordion_text }}</p>
+											{%- endif -%}
+
+											{%- if accordion_list.size > 0 -%}
+												<ul>
+													{%- for list_item in accordion_list -%}
+														{%- if list_item != blank -%}
+															<li>
+																{{ list_item }}
+															</li>
+														{%- endif -%}
+													{%- endfor -%}
+												</ul>
+											{%- endif -%}
+
+											{%- if accordion_text_small -%}
+												<small>{{ accordion_text_small }}</small>
+											{%- endif -%}
+
+											<ul class="list-links">
+												
+											</ul><!-- /.list-links -->
+										</div><!-- /.accordion__content -->
+									</div><!-- /.accordion__section -->
+								{%- endif -%}
+							{%- endfor -%}
+						</div><!-- /.accordion__body -->
+
+						{%- if _section.outro_text != blank -%}
+							<footer class="accordion__foot">
+								<h2 class="section__outro">
+									{{ _section.outro_text }}
+								</h2><!-- /.section__outro -->
+							</footer><!-- /.accordion__foot -->
+						{%- endif -%}
+					</div><!-- /.accordion -->
+				</div><!-- /.section__content -->
+			</div><!-- /.shell -->
+		</div><!-- /.section__inner -->
+	</section><!-- /.section-accordions -->
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Accordions",
+	"settings": [
+		{
+			"type": "select",
+			"id": "show_for",
+			"label": "Show For",
+			"options": [
+		      {
+		        "value": "member",
+		        "label": "Member User"
+		      },
+		      {
+		        "value": "new",
+		        "label": "New User"
+		      }
+		    ],
+		    "default":   "new"
+		},
+		{
+			"type": "text",
+			"id": "intro_text",
+			"label": "Intro Text"
+		},
+		{
+			"type": "text",
+			"id": "outro_text",
+			"label": "Outro Text"
+		},
+		{
+			"type": "header",
+			"content": "Images"
+		},
+		{
+			"type": "image_picker",
+			"id": "top_left_image",
+			"label": "Top Left Image",
+			"info": "Recommended width: 1024x."
+		},
+		{
+			"type": "image_picker",
+			"id": "top_right_image",
+			"label": "Top Right Image",
+			"info": "Recommended width: 1024px"
+		},
+		{
+			"type": "image_picker",
+			"id": "bottom_left_image",
+			"label": "Bottom Left Image",
+			"info": "Recommended width: 1024x."
+		},
+		{
+			"type": "image_picker",
+			"id": "bottom_right_image",
+			"label": "Bottom Right Image",
+			"info": "Recommended width: 1024x."
+		},
+		{
+			"type": "image_picker",
+			"id": "mobile_image",
+			"label": "Mobile Image"
+		}
+	],
+	"blocks": [
+		{
+			"type": "accordion",
+			"name": "Accordion",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "textarea",
+					"id": "content",
+					"label": "Content",
+					"info": "Use '---' to start a bullet list. All the text before will be regular text. Text after will be bullets with each line is a bullet. Use another '---' for small text after bullets"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Accordions"
+		}
+	]
+}
+{% endschema %}

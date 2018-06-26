@@ -1,0 +1,63 @@
+{%- assign _section  = section.settings -%}
+
+{%- if _section.show_for == 'member' -%}
+	{%- if customer -%}
+		{%- assign show_section = true -%}
+	{%- else -%}
+		{%- assign show_section = false -%}
+	{%- endif -%}
+{%- else -%}
+	{%- if customer -%}
+		{%- assign show_section = false -%}
+	{%- else -%}
+		{%- assign show_section = true -%}
+	{%- endif -%}
+{%- endif -%}
+
+{%- if _section.blog != blank and blogs[_section.blog].articles.size > 0 and show_section -%}
+	{%- assign blog_articles = blogs[_section.blog].articles -%}
+
+	<section class="section-articles">
+		<div class="shell shell--smaller">
+			<div class="articles">
+				{%- for _article in blog_articles -%}
+					{%- include 'article-item', _article: _article -%}
+				{%- endfor -%}
+			</div><!-- /.articles -->
+		</div><!-- /.shell -->
+	</section><!-- /.section-articles -->
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Featured Blog",
+	"settings": [
+		{
+			"type": "select",
+			"id": "show_for",
+			"label": "Show For",
+			"options": [
+		      {
+		        "value": "member",
+		        "label": "Member User"
+		      },
+		      {
+		        "value": "new",
+		        "label": "New User"
+		      }
+		    ],
+		    "default":   "new"
+		},
+		{
+			"type": "blog",
+			"id": "blog",
+			"label": "Blog"
+		}
+	],
+	"presets": [
+		{
+			"name": "Featured Blog"
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,324 @@
+/* ------------------------------------------------------------ *\
+	Fonts
+\* ------------------------------------------------------------ */
+
+/* ------------------------------------------------------------ *\
+	Reset
+\* ------------------------------------------------------------ */
+
+*,
+*:before,
+*:after { padding: 0; margin: 0; outline: 0; box-sizing: border-box }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, main { display: block }
+
+html,
+body { height: 100% }
+
+html { tap-highlight-color: rgba(0,0,0,0) }
+
+body { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; text-size-adjust: none }
+
+img, iframe, video, audio, object { max-width: 100% }
+
+img, iframe { border: 0 none }
+
+img { height: auto; display: inline-block; font-size: 0; vertical-align: middle }
+
+b,
+strong { font-weight: bold }
+
+address { font-style: normal }
+
+svg:not(:root) { overflow: hidden }
+
+a,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="file"],
+input[type="image"],
+label[for] { cursor: pointer }
+
+a[href^="tel"],
+button[disabled],
+input[disabled],
+textarea[disabled],
+select[disabled] { cursor: default }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner { padding: 0; border: 0 }
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+textarea,
+a[href^="tel"] { -webkit-appearance: none; -moz-appearance: none; appearance: none }
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none }
+
+textarea { overflow: auto; resize: none; -webkit-overflow-scrolling: touch; overflow-scrolling: touch }
+
+button,
+input,
+optgroup,
+select,
+textarea { font-family: inherit; font-size: inherit; color: inherit; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased }
+
+button,
+select { text-transform: none }
+
+table { width: 100%; border-collapse: collapse; border-spacing: 0 }
+
+nav ul,
+nav ol { list-style: none outside none }
+
+/* ------------------------------------------------------------ *\
+	Base
+\* ------------------------------------------------------------ */
+
+body { min-width: 320px; background: #fff; font-family: Arial, Tahoma, Verdana, Geneva, sans-serif; font-size: 14px; line-height: 1.5; color: #666 }
+
+{% if settings.custom_bg_color != '' %}
+	body { background-color: {{ settings.bg_color }}; }
+{% endif %}
+
+{% if settings.body-custom %}
+	body { background-image: url({{ settings.body-custom | img_url: "master" }}); background-size: cover; }
+{% endif %}
+
+a { color: inherit; text-decoration: none }
+
+a:hover { text-decoration: underline; }
+
+a[href^="tel"] { text-decoration: none }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.8em; }
+
+h3 { font-size: 1.6em; }
+
+h4 { font-size: 1.4em; }
+
+h5 { font-size: 1.2em; }
+
+h6 { font-size: 1em; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { margin-bottom: 0.75em; font-weight: normal; color: {{settings.headings_color}}; }
+
+p,
+ul,
+ol,
+dl,
+table,
+blockquote { margin-bottom: 1.5em }
+
+h1[class],
+h2[class],
+h3[class],
+h4[class],
+h5[class],
+h6[class],
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child,
+h6:last-child,
+p:last-child,
+ul:last-child,
+ol:last-child,
+dl:last-child,
+table:last-child,
+blockquote:last-child { margin-bottom: 0 }
+
+.highlight { font-weight: inherit; }
+
+/* ------------------------------------------------------------ *\
+	Helpers
+\* ------------------------------------------------------------ */
+
+/*  Clear  */
+
+.clear:after { content: ''; line-height: 0; display: table; clear: both }
+
+/*  Notext  */
+
+.notext { white-space: nowrap; text-indent: 100%; text-shadow: none; overflow: hidden }
+
+.notext-old { font-size: 0; line-height: 0; text-indent: -4000px }
+
+/*  Hidden  */
+
+[hidden],
+.hidden { display: none }
+
+/*  Alignleft  */
+
+.alignleft { float: left }
+
+/*  Alignright  */
+
+.alignright { float: right }
+
+/*  Disabled  */
+
+[disabled],
+.disabled { cursor: default }
+
+/* ------------------------------------------------------------ *\
+	Wrapper
+\* ------------------------------------------------------------ */
+
+.wrapper { }
+
+/* ------------------------------------------------------------ *\
+	Shell
+\* ------------------------------------------------------------ */
+
+.shell { max-width: 960px; margin: 0 auto; }
+
+
+/* ------------------------------------------------------------ *\
+	Header
+\* ------------------------------------------------------------ */
+
+.header { }
+
+
+/* ------------------------------------------------------------ *\
+	Main
+\* ------------------------------------------------------------ */
+
+.main { }
+
+/* ------------------------------------------------------------ *\
+	Footer
+\* ------------------------------------------------------------ */
+
+.footer { }
+
+
+/* ------------------------------------------------------------ *\
+	Content
+\* ------------------------------------------------------------ */
+
+.content {  }
+
+
+/* ------------------------------------------------------------ *\
+	Button
+\* ------------------------------------------------------------ */
+
+.btn { display: inline-block; vertical-align: middle; -webkit-appearance: none; -moz-appearance: none; appearance: none }
+
+/*  Button Block  */
+
+.btn-block { display: block; padding-left: 0; padding-right: 0 }
+
+.btn { display: inline-block; padding: 8px 15px; border: 0; font-size: 12px; color: {{settings.btn_text_color}}; background-color: {{settings.btn_main_color}}; border-radius: 4px; transition: all 0.2s ease; }
+.btn:hover { text-decoration: none; background-color: {{settings.btn_main_hover}}; }
+
+.btn-return,
+.btn-addresses,
+.btn-new-adress { float: right; margin-top: 2px; }
+
+/* ------------------------------------------------------------ *\
+	Form Elements
+\* ------------------------------------------------------------ */
+
+::-ms-clear { display: none; }
+input:invalid { box-shadow: none; }
+
+input::-webkit-input-placeholder { color: #d9d9d9; opacity: 1; }
+input::-moz-placeholder { color: #d9d9d9; opacity: 1; }
+input:-ms-input-placeholder { color: #d9d9d9; opacity: 1; }
+input::placeholder { color: #d9d9d9; opacity: 1; }
+
+textarea::-webkit-input-placeholder { color: #d9d9d9; opacity: 1; }
+textarea::-moz-placeholder { color: #d9d9d9; opacity: 1; }
+textarea:-ms-input-placeholder { color: #d9d9d9; opacity: 1; }
+textarea::placeholder { color: #d9d9d9; opacity: 1; }
+
+input:-webkit-autofill { -webkit-text-fill-color: inherit !important; -webkit-box-shadow: 0 0 0 1000px #fff inset }
+
+.field { }
+
+.textarea { }
+
+.select { }
+
+.radio { }
+
+.checkbox { }
+
+/* ------------------------------------------------------------ *\
+	Logo
+\* ------------------------------------------------------------ */
+
+{% if settings.logo_max_size != '' %}
+	{% capture max_width %} max-width: {{ settings.logo_max_size }};{% endcapture %}
+{% endif %}
+
+.logo { display: inline-block;{{max_width}} }
+
+/* ------------------------------------------------------------ *\
+	Nav
+\* ------------------------------------------------------------ */
+
+.nav { }
+
+/* ------------------------------------------------------------ *\
+	Section
+\* ------------------------------------------------------------ */
+
+.section { }
+
+/* ------------------------------------------------------------ *\
+	Slider
+\* ------------------------------------------------------------ */
+
+.slider { }
+.slider-product li { list-style: none; }
+
+/* ------------------------------------------------------------ *\
+	Table
+\* ------------------------------------------------------------ */
+
+.table { }
+
+/* ------------------------------------------------------------ *\
+	Widget
+\* ------------------------------------------------------------ */
+
+.widgets { }
+
+/* ------------------------------------------------------------ *\
+	#Templates
+\* ------------------------------------------------------------ */
+
+
+.page-title { padding-bottom: 30px; }
+
+.breadcrumbs { padding: 5px 0; }
+
+.collection-head { text-align: center;  }

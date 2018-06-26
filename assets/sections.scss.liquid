@@ -1,0 +1,28 @@
+/* ------------------------------------------------------------ *\
+	Column Grid
+\* ------------------------------------------------------------ */
+
+.custom-column-grid .section-column-grid { max-width: 100%; overflow: hidden; }
+.custom-column-grid .box-items-holder { font-size: 0; margin: 0 -1.5%; }
+.custom-column-grid .box-item { display: inline-block; vertical-align: top; font-size: 14px; padding: 0 1.5%; box-sizing: border-box; }
+
+/* ------------------------------------------------------------ *\
+	Image Text Boxes
+\* ------------------------------------------------------------ */
+
+.custom-image-text-block:after { content: ''; display: table; clear: both; }
+.custom-image-text-block .section-img-text-boxes { font-size: 0; }
+.custom-image-text-block .section-img-text-boxes .box { display: inline-block; width: 50%; vertical-align: top; font-size: 14px; }
+.custom-image-text-block .fullwidth-section .box { width: auto; display: block; }
+
+@media screen and (max-width: 767px){
+	.custom-image-text-block .box { display: block; width: auto !important; }
+}
+
+/* ------------------------------------------------------------ *\
+	Product grid
+\* ------------------------------------------------------------ */
+
+.custom-product-grid { max-width: 100%; overflow: hidden; }
+.custom-product-grid .section-products { font-size: 0; margin: 0 -2.5%; }
+.custom-product-grid .section-products > * { font-size: 14px;  }

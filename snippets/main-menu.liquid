@@ -1,0 +1,42 @@
+{%- assign navigation = linklists[menu_handle] -%}
+
+{%- if navigation -%}
+	<nav class="nav">
+		<ul>
+			{%- for first_level_item in navigation.links -%}
+				<li class="{% if first_level_item.links.size > 0 %} menu-item-has-children {% endif %} {% if first_level_item.active %} current-menu-item {% endif %}">
+					<a href="{{ first_level_item.url }}">
+						{{ first_level_item.title }}
+					</a>
+
+					{%- if first_level_item.links.size > 0 -%}
+						<div class="sub-menu">
+							<div class="shell">
+								<ul>
+									{%- for second_level_item in first_level_item.links -%}
+										<li>
+											<a href="{{ second_level_item.url }}">
+												{%- if _blocks.size > 0 -%}
+													{%- for block in _blocks -%}
+														{%- assign _block = block.settings -%}
+														{%- assign icon_handle = _block.title | handle -%}
+
+														{%- if icon_handle == second_level_item.handle and _block.icon != blank -%}
+															<span>{{ _block.icon | img_url: '150x' | img_tag }}</span>
+														{%- endif -%}
+													{%- endfor -%}
+												{%- endif -%}
+
+												{{ second_level_item.title }}
+											</a>
+										</li>
+									{%- endfor -%}
+								</ul><!-- /.sub-menu -->
+							</div><!-- /.shell -->
+						</div><!-- /.sub-menu -->
+					{%- endif -%}
+				</li>
+			{%- endfor -%}
+		</ul>
+	</nav><!-- /.nav -->
+{%- endif -%}

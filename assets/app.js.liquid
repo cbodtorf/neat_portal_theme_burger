@@ -1,0 +1,1091 @@
+$.fn.shuffle = function() {
+  var allElems = this.get(),
+    getRandom = function(max) {
+      return Math.floor(Math.random() * max);
+    },
+    shuffled = $.map(allElems, function() {
+      var random = getRandom(allElems.length),
+        randEl = $(allElems[random]).clone(true)[0];
+      allElems.splice(random, 1);
+      return randEl;
+    });
+  this.each(function(i) {
+    $(this).replaceWith($(shuffled[i]));
+  });
+  return $(shuffled);
+};
+
+function capitalise(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+$.fn.fadeInScroll = function(){
+  var $scroll = $(window).scrollTop(),
+      $height = $(window).height()-($(window).height()/3);
+  this.each(function() {
+    var otop = $(this).offset().top;
+    if(otop < $scroll+$height){
+      $(this).addClass('loaded');
+    }
+
+  });
+}
+
+neat = {}
+
+neat.appender = function(target,set){
+  $.each(set,function(k,v){
+    v = $(v);
+    var em = v[0].outerHTML;
+    if(em == null){
+      em = '<p>'+v[0].text()+'</p>';
+    };
+    target.append(em);
+  })
+}
+
+function appender(set) {
+  var content = "";
+  $.each(set,function(k,v){
+    v = $(v);
+    var em = v[0].outerHTML;
+    if(em == null){
+      em = '<p>'+v[0].text()+'</p>';
+    };
+    content = content + em;
+  });
+  return content;
+}
+
+
+
+
+///data-action - used to handle popout functions
+$(document).on('click','[data-action]',function(e){
+  e.preventDefault();
+  if(!$(this).hasClass('disabled')){
+    neat[$(this).attr('data-action')]();
+  }
+});
+
+////////////////////////////
+////LOADING ANI         ////
+////////////////////////////
+neat.loadOutOne = function(href){
+ window.location = href
+}
+
+neat.loadInOne = function(){
+  TweenLite.to($('.fadeInLoad'), .6, {delay:0,opacity:1});
+}
+
+$(document).on('click','a:not(.write-review-btn-hidden):not([href*="#"]):not(.noLink):not(.hasDrop):not(.blogThumb):not([target="_blank"]):not([data-popout])',function(e){
+  if($(window).width()>98000){
+    e.preventDefault();
+    neat.loadOutOne(this.href);  
+    return false
+  };
+});
+
+//show newspopout
+neat.showNewsLetterLanding = function() {
+  setTimeout(function() {
+    if(!$.cookie('news_neat') && $(window).width()>578) {
+      neat.modalOpen({"target":"#newsletterPopout"});
+      $.cookie('news_neat', true, {expires: 7});
+    };
+  }, 10000);
+}
+
+////////////////////////////
+////MENUS + DROPDOWNS   ////
+////////////////////////////
+/*
+$(document).on('click','.hasDrop',function(e){
+  e.preventDefault();
+  var wrap = $(this).parents('.linkWrap');
+  if(wrap.hasClass('active')){
+    neat.closeDrop();
+  }else{
+    neat.openDrop(wrap);
+  }	
+});
+*/
+
+header = {
+  bind:function(){
+    $(window).on('load resize scroll',function(){
+      header.headerScroll($(window).scrollTop());
+    });
+    $(document).on('click','.burger',function(e){
+      e.preventDefault();
+      neat.mobNav();
+    });
+    $('.hasDrop').hoverIntent( header.openDrop, function(){} );
+    $('.linkWrap').hoverIntent( function(){}, header.closeDrop );
+  },
+  openDrop:function(el){
+    var wrap = $(el.currentTarget).parent('.linkWrap')
+    $('header').addClass('open');
+    $('header .active').removeClass('active');
+    wrap.addClass('active');
+    if($(window).width()<1020){
+      $('header .active').find('.dropdownMenu').slideUp(200);
+      wrap.find('.dropdownMenu').slideDown(200);
+    };
+  },
+  closeDrop:function(){
+  var dropdown = $('header .active').find('.dropdownMenu')
+    $('header .active').removeClass('active');
+    $('header').removeClass('open');
+    if($(window).width()<1020){
+      dropdown.slideUp(200);
+    }
+  },
+  headerScroll:function(top){
+    if( $('header .active').size() < 1 ){
+      if(top > 0 && $('header .active').size() < 1 ){
+        $('.fxHeader').removeClass('preScroll');
+        $('.whiteHeader').removeClass('preScroll');
+      }else{
+        $('.fxHeader').addClass('preScroll');
+        $('.whiteHeader').addClass('preScroll');
+      }
+    }
+  },
+};
+//notifcation bar
+notification_bar = {
+  init:function(multipleblocks){
+    if(multipleblocks === true){
+    notification_bar.slider();
+    };
+  },
+  slider:function(){
+    $('.notification-bar ul').flickity({
+      cellAlign: 'center',
+      contain: false,
+      wrapAround: true,
+      prevNextButtons: false,
+      pageDots: false,
+      draggable: false,
+      autoPlay:5000
+    });
+  }
+};
+neat.mobNav = function(){
+  var nav = $('header nav,.burger');
+  if(nav.hasClass('open')){
+    nav.removeClass('open');
+    neat.bodyLock();
+  }else{
+    nav.addClass('open');
+    setTimeout(function(){
+      neat.bodyLock({
+        "target":$('header'),
+        "top":$(window).scrollTop()
+      });
+    },600);
+  }
+};
+
+////////////////////////////
+////PAGE SPECIFIC       ////
+////////////////////////////
+
+//homepage
+neat.home = function(){
+  
+  //slideshows
+  var recipeGrid = $('.home_recipes ul');
+
+  //onload , for slick slider
+    //recipees
+    recipeGrid.slick({
+      autoplay: false,
+      slidesToShow:3,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: true,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      variableWidth: false,
+      responsive: [
+        {
+          breakpoint: 1020,
+            settings: {
+          slidesToShow:3
+          }
+        },
+        {
+          breakpoint: 736,
+          settings: {
+            slidesToShow:2
+          }
+        },
+        {
+          breakpoint: 668,
+          settings: {
+            slidesToShow:1
+          }
+        }
+      ],
+      touchDrag: false,
+      mouseDrag: false
+    });
+    $('#recipeGrid span.next').click(function() {
+      recipeGrid.slick('slickNext');
+    });
+    $('#recipeGrid span.prev').click(function() {
+      recipeGrid.slick('slickPrev');
+    });
+
+  
+  //feed grid - instagram
+  var iGrid;
+  $.ajax({
+    type: "GET",
+    dataType: "jsonp",
+    url:'https://api.instagram.com/v1/users/self/media/recent/?access_token={{settings.instagram_access_token}}',
+    success: function(data) {
+      iGrid(data.data);
+    }
+  });
+  
+  iGrid = function(data){ 
+    if(data && data.length > 0){
+      for(var i = 0; i < 8; i++) {
+        var em = '<a target="_blank" href="'+data[i].link+'" class="section content bgImage feed_square" style="background-image:url('+data[i].images.standard_resolution.url+');"></a>'
+        $('.homepageigrid').append(em);
+        if(i === 7){
+          $('.homepageigrid a').unwrap();
+          $('.homepageigrid').remove();
+        }
+      }
+    }
+  }
+
+}
+
+//product page
+product = {
+  image_slide:false,
+  init:function(){
+    $('#relatedProducts ul li').shuffle();
+    if($('.variants_wrap').size()>0){
+      var el = $('.variants_wrap span').filter(function() { 
+        return $(this).attr("data-inventory") != 0; 
+      });
+      product.updateVariant($(el[0]));
+    };
+    product.update_inventory(); 
+    product.bind();
+  },
+  updateVariant:function(el){
+    var $updateFlavor = $('#selectedFlavor');
+    if(!el.hasClass('selected')){
+      el.addClass('selected').siblings('[data-flavor]').removeClass('selected');
+      $updateFlavor.text(el.attr('data-flavor'));
+      $('#product-select').val(el.attr('data-variantID')).trigger('change');
+    }
+  },
+  update_inventory:function(){
+    $.getJSON('/cart.js', function(cart, textStatus) {
+      $.each(cart.items,function(k,v){
+        var el = $('[data-id="'+v.id+'"]'),
+            inv  = parseInt(el.attr('data-inventory_fixed'),0) - v.quantity
+        el.attr('data-inventory',inv);
+      });
+      product.update_form();
+    });
+  },
+  update_form:function(){
+    console.log(true)
+    //data-inventory
+    var el = $('[name="id"]'),
+        id = el.val(),
+        $addToCart = $('#addToCart'),
+        $qty = $('[name="quantity"]'),
+        inv,price;
+    //get data
+    if(el.is('select')){
+      inv = el.find('option:selected').attr('data-inventory');
+      price = el.find('option:selected').attr('data-price');
+    }else{
+      inv = el.attr('data-inventory');
+      price = el.attr('data-price');
+    };
+    
+    $qty.attr('max',inv);
+  
+    if(inv <= "0"){
+      $addToCart.text('out of stock').prop('disabled',true).addClass('disabled');
+    }else{
+      $addToCart.text('Add to cart').prop('disabled',false).removeClass('disabled');
+    };
+  },
+  
+  bind:function(){ 
+    //bind variant change to slider image
+    $(document).on('change','[data-update-variant="true"]',function(){   
+      var id = $(this).val();
+      if(product.image_slider != false){
+      //get the slide
+      var index = $('.product__images li[data-id="'+id+'"]').index();
+        if(index > -1){
+          product.image_slider.flickity( 'select', index );
+        };
+      };
+      //update variant
+      product.update_form();
+    });
+    //update product image via thumbs
+    $(document).on('click','.product__thumb-images a',function(e){
+      e.preventDefault();
+      var index = $(this).index();
+      product.image_slider.flickity( 'select', index );
+    });
+    
+    $(document).on('click','[data-flavor]',function(){
+      product.updateVariant($(this));
+    }); 
+    
+    $(document).on('click','[data-purchaseType]',function(){
+      var $t = $(this),
+          subsWrap = $('.subsWrap');
+      if(!$t.hasClass('selected')){
+        $('[data-purchaseType]').removeClass('selected');
+        $t.addClass('selected');
+        if($t.attr('data-purchasetype') === "1"){ 
+          subsWrap.slideDown(200);
+          $('.recurring_div').trigger('click')
+        }else{
+          subsWrap.slideUp(200);
+          $('.one_time_div').trigger('click');
+          $('form.product_form input[name*="properties"]').removeAttr('name');
+        };
+      };    
+    }); 
+  
+    $(document).on('change','.ro_proxy',function(){
+      var select_one = $('.frequency_num'),
+          select_two = $('.frequency_type'),
+          selected = $(this).val(),
+          form = $('form.product_form'),
+          input = form.find('input[type="hidden"]'),
+          select_one_name = select_one.attr('class'),
+          select_two_name = select_two.attr('class');
+    
+      select_one.attr('name','properties['+select_one_name+']');
+      select_two.attr('name','properties['+select_two_name+']');
+    
+      if(selected === "1_week" || selected === "2_week" ){
+        select_two.val("2"); 
+      }else{
+        select_two.val("3");
+      };
+    
+      if(selected === "1_week" || selected === "1_month" ){
+        select_one.val("1"); 
+      }else{
+        select_one.val("2"); 
+      };
+   
+      input.each(function(){
+        if(!$(this).attr('name')){
+          var c = $(this).attr('class');
+          if(c === "ro_discount_percentage"|| c === "ro_unformatted_price"){
+            $(this).attr('name','properties[_'+c+']');
+          }else{
+            $(this).attr('name','properties['+c+']');
+          };
+        };
+      }).promise().done(function(){
+        select_one.trigger('change');
+        select_two.trigger('change');
+      });
+    });
+    
+    $(document).on('click','.accordianWrap .title',function(){
+      if(!$(this).hasClass('active')){
+        $('.accordianWrap .section').slideUp(200);
+        $('.accordianWrap .title').removeClass('active');
+        $(this).addClass('active');
+        $(this).next('.section').slideDown(200);
+      }else{
+        $('.accordianWrap .section').slideUp(200);
+        $('.accordianWrap .title').removeClass('active');
+      }
+    });
+  
+   
+    $(document).on('click','[data-getSection]',function(e){
+      e.preventDefault();
+      var $t = $(this);
+      if(!$t.hasClass('active')){
+        $('[data-getSection]').removeClass('active');
+        $t.addClass('active');
+        $('.accordSection').removeClass('active').filter($t.attr('data-getSection')).addClass('active');
+        product_recipee_slider.slick('checkResponsive');
+        //$('#disqus_thread iframe').css('height','auto');
+      }
+    });
+  
+    $(document).on('click','.c-accordian__heading',function(){
+      var $p = $(this).parent('.c-accordian__block');
+      if($p.hasClass('active')){
+        $p.removeClass('active').find('section').slideUp(300);
+      }else{
+        $('.c-accordian__block').removeClass('active').find('section').slideUp(300);
+        $p.addClass('active').find('section').slideDown(300);
+      };
+    }); 
+    
+    
+    $(document).on('click','.c-accordian__sub-heading',function(){
+      if(!$(this).hasClass('active')){
+        $('.c-accordian__sub-section').slideUp(200);
+        $('.c-accordian__sub-heading').removeClass('active');
+        $(this).addClass('active');
+        $(this).next('.c-accordian__sub-section').slideDown(200);
+      }else{
+        $('.c-accordian__sub-section').slideUp(200);
+        $('.c-accordian__sub-heading').removeClass('active');
+      }
+    });
+  },
+  sliders:function(multi_image){
+    //init slider
+    if(multi_image === true){
+      product.image_slider = $('.product__images').flickity({
+        cellAlign: 'center',
+        contain: false,
+        wrapAround: true,
+        prevNextButtons: false,
+        pageDots: false,
+        draggable: true,
+        imagesLoaded: true,
+        lazyLoad:true,
+      });  
+      // bind event listener
+      var flkty = product.image_slider.data('flickity');
+      product.image_slider.on( 'select.flickity', function(){
+        var index = flkty.selectedIndex;    
+        $('.product__thumb-images a:eq('+index+')').addClass('active').siblings().removeClass('active');
+      });
+    };
+   
+    var product_recipee_slider = $('#product_recipee_slider'),
+        rg_slidesFull =  $('#recipees').attr('data-slidesFull'),
+        rg_slidesLarge = $('#recipees').attr('data-slidesLarge'),
+        rg_slidesTablet = $('#recipees').attr('data-slidesTablet'),
+        rg_slidesMobile = $('#recipees').attr('data-slidesMobile');
+    //recipee
+    product_recipee_slider.slick({
+      autoplay: false,
+      slidesToShow:rg_slidesFull,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: true,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      adaptiveHeight:true,
+      respondTo:'slider',
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1020,
+            settings: {
+          slidesToShow:rg_slidesLarge
+          }
+        },
+        {
+          breakpoint: 736,
+          settings: {
+            slidesToShow:rg_slidesTablet
+          }
+        },
+        {
+          breakpoint: 668,
+          settings: {
+            slidesToShow:rg_slidesMobile
+          }
+        }
+      ],
+      touchDrag: false,
+      mouseDrag: false
+    });
+    
+    $('#recipees span.next').click(function() {
+      product_recipee_slider.slick('slickNext');
+    });
+    $('#recipees span.prev').click(function() {
+      product_recipee_slider.slick('slickPrev');
+    });
+    
+    //related items
+    var related = $('#relatedProducts ul').slick({
+      autoplay: false,
+      slidesToShow:3,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: true,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1020,
+          settings: {
+            slidesToShow:3
+          }
+        },
+        {
+          breakpoint: 736,
+          settings: {
+            slidesToShow:2
+          }
+        },
+        {
+          breakpoint:668,
+          settings: {
+            slidesToShow:1
+          }
+        }
+      ],
+      touchDrag: false,
+      mouseDrag: false
+    });
+    $('#relatedProducts span.next').click(function() {
+      related.slick('slickNext');
+    });
+    $('#relatedProducts span.prev').click(function() {
+      related.slick('slickPrev');
+    }); 
+  }
+};
+
+
+//cart 
+ajax_cart = {
+  init:function(){
+    ajax_cart.bind();
+  },
+  bind:function(){
+    //submit add to cart form
+    $(document).on('submit','[action="/cart/add"]',function(e){
+      e.preventDefault();
+      ajax_cart.addToCart($(this));
+    });
+    //open cart
+    $(document).on('click','[data-get_modal="cart"]',function(e){
+      e.preventDefault();
+      ajax_cart.open();
+    });
+    //close cart
+    $(document).on('click','[data-cart="close"]',function(){
+      ajax_cart.close();
+    });
+  },
+  open:function(){
+    $('body').css('overflow-y','hidden');
+    $('[data-modal="cart"]').fadeIn(400,function(){
+      $('.mdl__cart').fadeIn(200);
+    });
+  },
+  close:function(){
+    $('.mdl__cart').fadeOut(200,function(){
+      $('[data-modal="cart"]').fadeOut(400);
+      $('body').css('overflow-y','scroll');
+    });
+  },
+  
+  animate_add_to_cart:function(){
+    $("html, body").animate({ scrollTop:0},function(){
+      
+      var timeout = setTimeout(function() {
+          ajax_cart.close();
+        },3000);
+      
+      $( ".mdl__cart" ).mouseenter(function() {
+        clearTimeout(timeout); 
+      });
+      
+      ajax_cart.open();
+    });
+  },
+  
+  addToCart:function(form){
+    var data = {
+      quantity:form.find('[name="quantity"]').val(),
+      id: form.find('[name="id"]').val()
+    };
+    $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: data,
+      dataType: 'json',
+      success: function(data) { 
+        ajax_cart.getCart();  
+        ajax_cart.animate_add_to_cart();
+        product.update_inventory();
+      },
+      error:function(data,b){
+        product.update_form(); 
+      }
+    });
+  },
+  get_total_items:function(cart){
+    var items = $.grep(cart.items,function(item){
+        return item
+    });
+    var total = 0;
+    $.each(items,function(k,v){
+      total = total + v.quantity;
+    });
+    return total;
+  },
+   getCart:function(){
+    $.getJSON('/cart.js', function(cart, textStatus) {
+      ajax_cart.buildCart(cart.items);
+      $('[data-cart="cart_total"]').html(Shopify.formatMoney(cart.total_price));
+      $('[data-cart="count"]').text(cart.item_count);
+    });
+  },
+  
+  buildCart:function(items){
+    $('.mdl--cart__content').empty(); 
+    
+    if(items){
+      var content = "";
+      $.each(items,function(k,v){    
+        var template = $($('[data-cart="cart_line_template"]').html());
+        //add items to template
+        template.find('[data-cart="link"]').attr('href',v.url);
+        template.find('[data-cart="title"]').text(v.title);
+        template.find('[data-cart="qty"]').text(v.quantity);
+        template.find('[data-cart="img"]').attr('src',v.image);
+        template.find('[data-cart="line_price"]').text(Shopify.formatMoney(v.line_price));
+        $('.mdl--cart__content').append(template);
+      });
+      //ajaxcart.setCartHeight();
+    };
+  },
+}
+
+//blog
+neat.blog = function(){
+  var isotope = $('.blogGridWrapper ul');
+  isotope.imagesLoaded(function(){
+    isotope.isotope({
+      itemSelector: 'li',     
+      gutter: 0,
+      columnWidth: 'li',
+      layoutMode: 'packery',
+      percentPosition: true
+    });
+  });
+}
+
+//blog mobile filters
+$(document).on('change','.mobile_filter',function(){
+  window.location.href = $(this).val();
+});
+
+neat.recipeBlog = function(){
+  
+  var isotope = $('.blogGridWrapper ul');
+  isotope.imagesLoaded(function(){
+    isotope.isotope({
+      itemSelector: 'li',     
+      gutter: 0,
+      columnWidth: 'li',
+      layoutMode: 'packery',
+      percentPosition: true
+    });
+  });
+  /*
+  $(document).on('click','#blogNav a',function(e){
+    e.preventDefault();
+    var $t = $(this);
+    if(!$t.hasClass('active')){
+      $t.addClass('active').siblings('a').removeClass('active'); 
+      isotope.isotope('shuffle');
+    }
+  });
+  */
+  
+    $('.recipeeFullGrid ul').slick({
+      autoplay: false,
+      slidesToShow:1,
+      pauseOnHover: true,
+      speed: 800,
+      infinite: true,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      touchDrag: false,
+      mouseDrag: false
+    });
+    $('.recipeeFullGrid span.next').click(function() {
+      $('.recipeeFullGrid ul').slick('slickNext');
+    });
+    $('.recipeeFullGrid span.prev').click(function() {
+      $('.recipeeFullGrid ul').slick('slickPrev');
+    }); 
+}
+
+neat.ambBlog = function(){
+  
+  
+  $('.q_and_a h2').each(function(){
+    var content = $(this).nextUntil('h2'),
+        el = '<section></section>';
+    el = $(el);
+    el.insertAfter($(this));
+    el.html(content);
+  });
+  
+  $(document).on('click','.q_and_a h2:not(.active)',function(){
+    var sections = $('.q_and_a section'),
+        header = $('.q_and_a h2'),
+        t = $(this)
+    header.removeClass('active');
+    sections.slideUp(200);
+    t.addClass('active').next('section').slideDown(200);
+    setTimeout(function(){
+      $("html, body").animate({ scrollTop:t.offset().top - 200}, 600);
+    },400);
+  });
+  
+   $(window).on('load',function(){
+    //gallery slider
+    $('.gallery_slider ul.slider').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      centerMode: true,
+      variableWidth: true,
+      accessibility: false,
+      arrows: false,
+      edgeFriction:0
+    });
+      
+     $('.gallery_slider span.next').click(function() {
+      $('.gallery_slider ul').slick('slickNext');
+    });
+    $('.gallery_slider span.prev').click(function() {
+      $('.gallery_slider ul').slick('slickPrev');
+    });
+  });
+  
+}
+
+//press slider
+neat.pressSlider = function(){
+    
+    $('#featuredInControls ul').slick({
+      autoplay: false,
+      slidesToShow:5,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: true,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1020,
+          settings: {
+            slidesToShow:3
+          }
+        },
+        {
+          breakpoint:668,
+          settings: {
+            slidesToShow:1
+          }
+        }
+      ],
+      touchDrag: false,
+      mouseDrag: false,
+      asNavFor: '#featuredInQuotes',
+      centerMode: true,
+      focusOnSelect: true
+    });
+    
+     $('#featuredInQuotes').slick({
+       autoplay: false,
+       slidesToShow:1,
+       pauseOnHover: true,
+       speed: 700,
+       infinite: true,
+       arrows: false,
+       accessibility: false,
+       dots: false,
+       slidesToScroll: 1,
+       asNavFor: '#featuredInControls ul',
+       fade:true,
+       adaptiveHeight: false
+    });
+}
+//accounts pages
+neat.userAccount = function() {
+  //function to load account section using #
+  var updateHash = function() {
+    if (window.location.hash) {
+      $('#accountNav a').removeClass('active').filter('[href="' + window.location.hash + '"]').addClass('active');
+      $('.accountSection').removeClass('active').filter('[data-id="' + window.location.hash + '"]').addClass('active');
+    }
+  };
+  $('#accountNav a:not(.signOut)').click(function(e) {
+    e.preventDefault();
+    window.location.hash = $(this).attr('href');
+    updateHash();
+  });
+  updateHash(); 
+   //view sections
+  $('.accountQuickView').click(function(e) {
+    e.preventDefault();
+    $('.accountQuickView .accountLine').removeClass('active');
+    $(this).closest('.accountLine').toggleClass('active');
+  });
+  
+   //post address form
+  $('#address form').submit(function(e) {
+    e.preventDefault();
+    var url = $(this).attr('action'),
+      data = $(this).serialize(),
+      params = {
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function(data, textStatus, jqXHR) {
+          
+          window.location.reload();
+        },
+        error: function(textStatus) {
+          console.log(textStatus);
+        }
+      };
+    $.ajax(params);
+    return false;
+  });
+  
+};
+//production page 
+neat.production = function(){
+  
+  neat.slideNavHide = function(length,slide,parent){
+    var prev = parent.find('span.prev'),
+        next = parent.find('span.next');
+    
+    if(slide === length-1 ){
+      next.fadeOut(200);
+    }else{
+      next.fadeIn(200);
+    }
+    
+    if(slide === 0 ){
+      prev.fadeOut(200);
+    }else{
+      prev.fadeIn(200);
+    }  
+  }
+  
+
+    $('.wheySection ul').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+      neat.slideNavHide(slick.$slides.length,nextSlide,$('.wheySection'));
+    });
+    $('.wheySection ul').slick({
+      autoplay: false,
+      slidesToShow:1,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: false,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      touchDrag: false,
+      mouseDrag: false
+    });
+    $('.wheySection span.next').click(function() {
+      $('.wheySection ul').slick('slickNext');
+    });
+    $('.wheySection span.prev').click(function() {
+      $('.wheySection ul').slick('slickPrev');
+    });
+    
+     $('.veganSection ul').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+      neat.slideNavHide(slick.$slides.length,nextSlide,$('.veganSection'));
+    });
+    $('.veganSection ul').slick({
+      autoplay: false,
+      slidesToShow:1,
+      pauseOnHover: true,
+      speed: 700,
+      infinite: false,
+      arrows: false,
+      accessibility: false,
+      dots: false,
+      slidesToScroll: 1,
+      touchDrag: false,
+      mouseDrag: false
+    });
+    $('.veganSection span.next').click(function() {
+      $('.veganSection ul').slick('slickNext');
+    });
+    $('.veganSection span.prev').click(function() {
+      $('.veganSection ul').slick('slickPrev');
+    });
+
+}
+////////////////////////////
+////MODAL BOX           ////
+////////////////////////////
+neat.modal = function(){
+  var popouts = $('#popouts'),
+      popOutContent =  popouts.find('#popOutContent'),
+      timeout = 0;
+  
+  //close inner
+  var closeInner = new TimelineLite({paused:true});
+  closeInner.addLabel('closeInner')
+  .to(popOutContent, 0.2, {scale:.8, opacity:0,ease:Ease.easeIn},'closeInner')
+  closeInner.play();
+  
+  //switch between modals when already open
+  neat.switchInner = function(options){
+    //close the inside div
+    closeInner.play();
+    var id = popOutContent.find('.content').attr('data-id'),
+        timeout = 0;
+    if(id!=null){
+      timeout = 1000
+    }
+    setTimeout(function(){
+      //put current html of modal into template to save for later
+      if(id!=null){
+        $('#'+id).empty().html(popOutContent.html());
+      }
+      //load new content
+      popOutContent.empty().html($(options.target).html());
+      //popouts.find('span.confirm').attr('data-action',options.action_confirm);
+       closeInner.reverse();
+    },timeout);
+    
+  }
+  //open the modal
+  neat.modalOpen = function(options){
+    if(!popouts.is(":visible")){
+      timeout = 200;
+      popouts.fadeIn(200);
+    }
+    setTimeout(function(){
+      neat.switchInner(options);
+       neat.bodyLock({
+        "target":popouts,
+        "top":$(window).scrollTop()
+      });
+    },timeout);  
+  }
+  
+  //close the modal
+  neat.modalClose = function(){
+    closeInner.play();
+    setTimeout(function(){
+      popouts.fadeOut(200);
+      neat.bodyLock();
+    },500);
+  }
+  
+ //click handler to show
+  $(document).on('click','[data-popout]',function(e){
+    e.preventDefault();
+    neat.modalOpen({
+     "target":$(this).attr('data-popout')
+    });
+  });
+}
+//lock body to prevent overflow scrolling
+neat.bodyLock = function(options){
+  if ($(window).width()<1020){
+    var $body = $('html'),$em,top;
+    if(!$body.hasClass('locked')){
+      $em = options.target;
+      top = options.top;
+      $body.addClass('locked')
+      $($em).attr('data-scroll',top);
+    }else{
+      top = $('[data-scroll]').attr('data-scroll');
+      $body.removeClass('locked');
+      $(window).scrollTop(top);
+      $('[data-scroll]').removeAttr('data-scroll');
+    }
+  }
+};
+
+
+
+////////////////////////////
+////SITEWIDE / DOCREADY ////
+////////////////////////////
+
+ $(document).on('click','.quantInput span',function(){
+  var t = $(this),
+      a = t.closest('.quantInput').find('input'),
+      b = a.val(),
+      c = parseInt(a.attr('min'),0),
+      d = parseInt(a.attr('max'),0),
+      x = +b+1,
+      y = +b-1  
+  console.log(d)
+  if(t.hasClass('plus')){ 
+    if(b <= d-1){
+      a.val(x);
+    };
+  }else{
+    if(b>0 && y > c){
+      a.val(y);
+    };
+  }
+})
+ 
+ 
+$(function() {
+  header.bind();
+  neat.modal();
+  FastClick.attach(document.body);
+  neat.showNewsLetterLanding();
+  ajax_cart.init();
+});
+
+$(window).load(function(){
+  $('.fadeIn').fadeInScroll();
+  neat.loadInOne();
+});
+
+$(window).scroll(function(){
+  $('.fadeIn').fadeInScroll();
+});
+
+
+$(window).resize(function(){
+  $('.fadeIn').fadeInScroll();
+});
+
+
+$(window).bind("pageshow", function(event) {
+  if (event.originalEvent.persisted) {
+    window.location.reload() 
+  }
+});
+

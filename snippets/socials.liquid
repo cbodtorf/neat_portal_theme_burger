@@ -1,0 +1,19 @@
+{% capture social_networks %}instagram,facebook,twitter{% endcapture %}
+
+{% assign split_social_networks = social_networks | split: ',' %}
+
+<div class="socials">
+	<ul>
+		{%- for social in split_social_networks -%}
+			{%- assign social_handle = social | append: '_link' -%}
+
+			{%- if settings[social_handle] != blank -%}
+				<li>
+					<a href="{{ settings[social_handle] }}" target="_blank">
+						<i class="fa fa-{{ social }}" aria-hidden="true"></i>
+					</a>
+				</li>
+			{%- endif -%}
+		{%- endfor -%}
+	</ul>
+</div><!-- /.socials -->

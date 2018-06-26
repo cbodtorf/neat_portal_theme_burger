@@ -1,0 +1,24 @@
+{%- if settings.embedded_form != blank -%}
+	<section class="section-newsletter">
+		<div class="shell">
+			<div class="section__content">
+				{%- if settings.description != blank -%}
+					<p>{{ settings.description }}</p>
+				{%- endif -%}
+
+				{{ settings.embedded_form }}
+
+				<script type="text/javascript">
+					KlaviyoSubscribe.attachToForms('#email_signup', {
+						hide_form_on_success: true,
+						success: function() {
+							$('.section-newsletter .section__content p').css({
+								'display': 'none'
+							})
+						}
+					});
+				</script>
+			</div><!-- /.section__content -->
+		</div><!-- /.shell -->
+	</section><!-- /.section-newsletter -->
+{%- endif -%}

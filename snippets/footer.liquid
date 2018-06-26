@@ -1,0 +1,18 @@
+<footer class="footer">
+	<div class="shell">
+		<div class="footer-nav">
+			{% include 'menu', menu_handle: settings.footer_quicklinks_linklist, dropdown_before: '', dropdown_after: '' %}
+		</div><!-- /.footer-nav -->
+
+		{% if settings['show_in_footer'] %}
+			{% include 'socials' %}
+		{% endif %}
+
+		{% assign copyright = settings.copyright | default: '' %}
+		{% unless copyright == '' or copyright == empty or copyright == blank %}
+			<div class="copyright">
+				{{ settings.copyright }}
+			</div><!-- /.copyright -->
+		{% endunless %}
+	</div><!-- /.shell -->
+</footer><!-- /.footer -->

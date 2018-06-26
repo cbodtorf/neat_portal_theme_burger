@@ -1,0 +1,26 @@
+<h1>{{ 'general.search.title' | t }}</h1>
+
+{% if search.results != empty and search.performed %}
+	<p class="results">{{ 'general.search.results_for_html' | t: terms: search.terms }}</p>
+{% elsif search.results == empty and search.performed %}
+	<p class="no-results">{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+{% endif %}
+
+{% include 'form-search' %}
+
+{% if search.performed %}
+	{% paginate search.results by settings.pagination_limit %}
+		{% if search.results != empty and search.terms != "" %}
+
+			<div class="collection-products">
+				{% for product in search.results %}
+
+					{% include 'product-item' %}
+
+				{% endfor %}
+			</div><!-- /.collection-products -->
+
+			{% include 'pagination' %}
+		{% endif %}
+	{% endpaginate %}
+{% endif %}	
