@@ -1,0 +1,114 @@
+<section class="section-recharge" id="recharge-step-3">
+  <div class="shell">
+    <div class="section__inner">
+      <header class="section__head">
+        <h2>
+          {{ _section.frequency_page_title }} <br>
+
+          <span>{{ _section.frequency_page_product_count }}</span>
+        </h2>
+
+        <p>{{ _section.frequency_page_delivery_text }}</p>
+      </header><!-- /.section__head -->
+
+      <div class="section__body">
+        <div class="radios">
+          <input type="radio" name="recharge-period" id="period-1">
+          <input type="radio" name="recharge-period" id="period-2" checked>
+          <input type="radio" name="recharge-period" id="period-3">
+        </div><!-- /.radios -->
+
+        <div class="periods">
+          <div class="period">
+            <div class="period__inner">
+              <a href="#period-1" class="period__link"></a>
+
+              <div class="period__image">
+                <img src="{{ 'period-image-1.png' | asset_url }}" alt="" class="hidden-xs">
+                <img src="{{ 'period-1-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
+              </div><!-- /.period__image -->
+
+              <div class="period__info">
+                <div class="period__title">
+                  <h3>
+                    Pretty neat
+                  </h3>
+                </div><!-- /.period__title -->
+
+                <div class="period__content">
+                  <p>
+                    Delivered every 2 months
+                  </p>
+                </div><!-- /.period__content -->
+              </div><!-- /.period__info -->
+            </div><!-- /.period__inner -->
+          </div><!-- /.period -->
+
+          <div class="period selected">
+            <div class="period__inner">
+              <a href="#period-2" class="period__link"></a>
+
+              <div class="period__image">
+                <img src="{{ 'period-image-2.png' | asset_url }}" alt="" class="hidden-xs">
+                <img src="{{ 'period-2-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
+              </div><!-- /.period__image -->
+
+              <div class="period__info">
+                <div class="period__title">
+                  <h3>
+                    Very neat
+                  </h3>
+                </div><!-- /.period__title -->
+
+                <div class="period__content">
+                  <p>
+                    Delivered every month
+                  </p>
+                </div><!-- /.period__content -->
+              </div><!-- /.period__info -->
+            </div><!-- /.period__inner -->
+          </div><!-- /.period -->
+
+          <div class="period">
+            <div class="period__inner">
+              <a href="#period-3" class="period__link"></a>
+
+              <div class="period__image">
+                <img src="{{ 'period-image-3.png' | asset_url }}" alt="" class="hidden-xs">
+                <img src="{{ 'period-3-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
+              </div><!-- /.period__image -->
+
+              <div class="period__info">
+                <div class="period__title">
+                  <h3>
+                    Super neat
+                  </h3>
+                </div><!-- /.period__title -->
+
+                <div class="period__content">
+                  <p>
+                    Delivered every 2 weeks
+                  </p>
+                </div><!-- /.period__content -->
+              </div><!-- /.period__info -->
+            </div><!-- /.period__inner -->
+          </div><!-- /.period -->
+        </div><!-- /.periods -->
+      </div><!-- /.section__body -->
+    </div><!-- /.section__inner -->
+
+    <div class="section__actions">
+      <button data-id="addSubscriptionToCart" type="submit" class="btn recharge-submit">{{ _section.frequency_page_btn_text }}</button>
+    </div><!-- /.section__actions -->
+
+    <footer class="section__foot">
+      <p class="error_message">
+        Please select period
+      </p><!-- /.error_message -->
+
+      <div class="rte">
+        {{ _section.frequency_page_footer_text }}
+      </div>
+    </footer><!-- /.section__foot -->
+  </div><!-- /.shell -->
+</section><!-- /.section-recharge -->

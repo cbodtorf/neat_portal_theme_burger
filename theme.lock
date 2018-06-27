@@ -26,7 +26,7 @@ assets/blogHero.jpg:
 assets/bundle.css.liquid:
   dev_cb: 2018-06-26T15:03:45-04:00   a286c2c8adc827199849e6b26133f3e4
 assets/bundle.js:
-  dev_cb: 2018-06-26T15:03:45-04:00   c8b17fde3a6cabbf6cdf9aeaca16948c
+  dev_cb: 2018-06-27T17:59:20-04:00   791d6030201753b5a785822f81b3a64c
 assets/bundle.js.map:
   dev_cb: 2018-06-26T15:03:46-04:00   a49b99a6aa59741a5c9c1478f3ced411
 assets/cafe_menu.jpg:
@@ -256,7 +256,7 @@ assets/period-image-3.png:
 assets/pjones.jpg:
   dev_cb: 2018-06-26T15:04:18-04:00   f3edca9723e86e502c12b72d70a350b2
 assets/portal.scss.liquid:
-  dev_cb: 2018-06-26T17:43:27-04:00   d7b2d87410ab7ec60a6733d61b3a9d5a
+  dev_cb: 2018-06-27T11:20:11-04:00   3aa7059d6ea34f42c2bdbe5efbc3c919
 assets/prodBlurb.jpg:
   dev_cb: 2018-06-26T15:04:18-04:00   3dee12e1ddbb8b1d83c298928cbd8704
 assets/prodBlurb.png:
@@ -407,6 +407,8 @@ sections/section-news.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   44335ef265c56fbb1c402f964f9081c2
 sections/section-outro.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   61409004ae13a37b127438490c46f610
+sections/section-trial-flow.liquid:
+  dev_cb: 2018-06-27T17:27:04-04:00   7c02255c566a26293e1dd2b810b91f43
 sections/template-password.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   a3b3a06a7cd79a42a53fe9d665af0b4a
 snippets/article-item.liquid:
@@ -459,6 +461,12 @@ snippets/subscription-product.liquid:
   dev_cb: 2018-06-26T15:14:29-04:00   193734f0a99c5225f1ee529f3a66572b
 snippets/subscription-theme-footer.liquid:
   dev_cb: 2018-06-26T15:14:37-04:00   12b2680357a3f273b47c07d9baf7252f
+snippets/trial-flow-page-1.liquid:
+  dev_cb: 2018-06-27T18:21:38-04:00   09bcd06d1b67dda1ced92308cd293fb6
+snippets/trial-flow-page-2.liquid:
+  dev_cb: 2018-06-27T18:01:55-04:00   9c67cb7509e8acff1e59eb1a95504b08
+snippets/trial-flow-page-3.liquid:
+  dev_cb: 2018-06-27T15:58:49-04:00   3a237f063047c36da04c204db2cb10e9
 templates/404.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   60236051716d7f7ccf183137d9d5b08b
 templates/article.liquid:
@@ -494,7 +502,7 @@ templates/page.contact.liquid:
 templates/page.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   db41bedf58ab3e653382d6c38db948e8
 templates/page.recharge.liquid:
-  dev_cb: 2018-06-26T15:04:38-04:00   9cfc22447c797757ce24a5af1aed4187
+  dev_cb: 2018-06-27T14:01:02-04:00   cd31eb021deb87b9bcb49e43ff3503ab
 templates/password.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   35ded8f433ce9b3be7821ce8beff884e
 templates/product.liquid:

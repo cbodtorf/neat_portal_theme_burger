@@ -1,0 +1,246 @@
+{%- assign _section  = section.settings -%}
+{%- assign _blocks = section.blocks -%}
+
+{%- if _section.show_for == 'member' -%}
+	{%- if customer -%}
+		{%- assign show_section = true -%}
+	{%- else -%}
+		{%- assign show_section = false -%}
+	{%- endif -%}
+{%- else -%}
+	{%- if customer -%}
+		{%- assign show_section = false -%}
+	{%- else -%}
+		{%- assign show_section = true -%}
+	{%- endif -%}
+{%- endif -%}
+
+{%- if show_section -%}
+	<section class="section-steps">
+		<div class="shell">
+			<nav class="nav-steps">
+				<ul>
+					<li class="active recharge-previous-step">
+						<a href="#recharge-step-1">Trial Set</a>
+					</li>
+
+					<li class="step-2 recharge-previous-step">
+						<a href="#recharge-step-2">Ongoing Deliveries</a>
+					</li>
+
+					<li class="step-3 recharge-previous-step">
+						<a href="#recharge-step-3">Ongoing Frequency</a>
+					</li>
+				</ul>
+			</nav><!-- /.nav -->
+		</div><!-- /.shell -->
+	</section><!-- /.section-steps -->
+
+	<form id="trialSubscription">
+		<input class="subscription-form-input" type="hidden" name="variant_id" value="">
+		<input class="subscription-form-input" type="hidden" name="subscription_id" value="">
+		<input class="subscription-form-input" type="hidden" name="_ongoing_variant_id" value="">
+		<input class="subscription-form-input" type="hidden" name="quantity" value="1">
+		<input class="subscription-form-input" type="hidden" name="shipping_interval_frequency" value="4">
+		<input class="subscription-form-input" type="hidden" name="shipping_interval_unit_type" value="weeks">
+
+		{% comment %} Choose Trial Product {% endcomment %}
+		{% include 'trial-flow-page-1' %}
+
+		{% comment %} Choose Ongoing Product {% endcomment %}
+		{% include 'trial-flow-page-2' %}
+
+		{% comment %} Choose Subscription Frequency {% endcomment %}
+		{% include 'trial-flow-page-3' %}
+	</form>
+
+	<script>
+	  window.addEventListener('load', function() {
+      $('[data-id="addSubscriptionToCart"]').click(function(evt){
+        evt.preventDefault();
+
+        console.log('click event data:', formData)
+        addItemToCart({
+					"id": $('.subscription-form-input[name="variant_id"]').val(),
+					"quantity": $('.subscription-form-input[name="quantity"]').val(),
+					"properties[shipping_interval_frequency]": $('.subscription-form-input[name="shipping_interval_frequency"]').val(),
+					"properties[shipping_interval_unit_type]": $('.subscription-form-input[name="shipping_interval_unit_type"]').val(),
+					"properties[subscription_id]": $('.subscription-form-input[name="subscription_id"]').val()
+				});
+      });
+    });
+
+	  function addItemToCart (formJSON) {
+	    console.log('ajax data:', formJSON)
+	    // jQuery.ajax({
+	    //     type: 'POST',
+	    //     url: '/cart/add.js',
+	    //     data: formJSON,
+	    //     dataType: 'json',
+	    //     success: function() {
+	    //       $.ajax({
+	    //         url: '/cart',
+	    //         success: function success(data) {
+			// 					// Navigate to Checkout.
+	    //         }
+	    //       });
+	    //     }
+	    // });
+	  }
+	</script>
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Trial Flow",
+	"settings": [
+		{
+			"type": "select",
+			"id": "show_for",
+			"label": "Show For",
+			"options": [
+		      {
+		        "value": "member",
+		        "label": "Member User"
+		      },
+		      {
+		        "value": "new",
+		        "label": "New User"
+		      }
+		    ],
+		    "default":   "new"
+		},
+		{
+			"type": "header",
+			"content": "Trial Product"
+		},
+		{
+			"type": "text",
+			"id": "trial_page_title",
+			"label": "Trial Page Title",
+			"default": "Customize Your Trial"
+		},
+		{
+			"type": "collection",
+			"id": "trial_collection",
+			"label": "Select Collection of Trial Product"
+		},
+		{
+			"type": "text",
+			"id": "trial_page_product_price",
+			"label": "Trial Product Price",
+			"default": "$5"
+		},
+		{
+			"type": "text",
+			"id": "trial_page_delivery_text",
+			"label": "Trial Delivery Text",
+			"default": "+ free delivery"
+		},
+		{
+			"type": "text",
+			"id": "trial_page_btn_text",
+			"label": "Trial Button Text",
+			"default": "NEXT STEP"
+		},
+		{
+			"type": "richtext",
+			"id": "trial_page_footer_text",
+			"label": "Trial Footer Text",
+			"default": "<p>Trial Set Includes 4 Protein servings of your choice, a Neat Shaker, and recipe booklet. Lasts 1 to 2 weeks depending on your lifestyle.</p>"
+		},
+		{
+			"type": "header",
+			"content": "Ongoing Product"
+		},
+		{
+			"type": "text",
+			"id": "ongoing_page_title",
+			"label": "Ongoing Page Title",
+			"default": "Customize your ongoing protein plan"
+		},
+		{
+			"type": "collection",
+			"id": "ongoing_collection",
+			"label": "Select Collection of Ongoing Product"
+		},
+		{
+			"type": "text",
+			"id": "ongoing_page_product_price",
+			"label": "Ongoing Product Price",
+			"default": "$20"
+		},
+		{
+			"type": "text",
+			"id": "ongoing_page_delivery_text",
+			"label": "Ongoing Delivery Text",
+			"default": "+ free delivery"
+		},
+		{
+			"type": "text",
+			"id": "ongoing_page_btn_text",
+			"label": "Ongoing Button Text",
+			"default": "NEXT STEP"
+		},
+		{
+			"type": "richtext",
+			"id": "ongoing_page_footer_text",
+			"label": "Ongoing Footer Text",
+			"default": "<p>Your first refill dispatches June 7, 2018 and is not charged today. If you’re not sure about a subscription yet, don’t worry! We’ll ask you on June 5, 2018 and you can easily make changes, or cancel if it’s not right for you.</p>"
+		},
+		{
+			"type": "header",
+			"content": "Ongoing Frequency"
+		},
+		{
+			"type": "text",
+			"id": "frequency_page_title",
+			"label": "Frequency Page Title",
+			"default": "How neat are you?"
+		},
+		{
+			"type": "text",
+			"id": "frequency_page_product_count",
+			"label": "Frequency Page Product Count",
+			"default": "12 sachets"
+		},
+		{
+			"type": "text",
+			"id": "frequency_page_delivery_text",
+			"label": "Frequency Page Quantity Sub Text",
+			"default": "per delivery"
+		},
+		{
+			"type": "text",
+			"id": "frequency_page_btn_text",
+			"label": "Frequency Page Button Text",
+			"default": "Review Order"
+		},
+		{
+			"type": "richtext",
+			"id": "frequency_page_footer_text",
+			"label": "Frequency Page Footer Text",
+			"default": "<p>We’ll send your ongoing boxes based on your protein requirements. It’s easy to change your shipping frequency at any time, so anytime you want to change it up (including blend or flavour), you can manage from your account.</p>"
+		}
+	],
+	"blocks": [
+		{
+			"type": "accordion",
+			"name": "Accordion",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "textarea",
+					"id": "content",
+					"label": "Content",
+					"info": "Use '---' to start a bullet list. All the text before will be regular text. Text after will be bullets with each line is a bullet. Use another '---' for small text after bullets"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

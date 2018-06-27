@@ -1,0 +1,86 @@
+{% assign trial_collection_products = collections[_section.trial_collection].products %}
+
+<section class="section-recharge visible" id="recharge-step-1">
+  <div class="shell">
+    <div class="section__inner">
+      <header class="section__head">
+        <h2>
+          {{ _section.trial_page_title }} <br>
+
+          <span>{{ _section.trial_page_product_price }}</span>
+        </h2>
+
+        <p>{{ _section.trial_page_delivery_text }}</p>
+      </header><!-- /.section__head -->
+
+      <div class="section__body">
+        <div class="radios">
+          {% for trial in trial_collection_products %}
+            <input
+              type="radio"
+              name="variant_id"
+              id="variant_id_{{ trial.selected_or_first_available_variant.id }}"
+              {% if forloop.index == 2 %}
+              checked
+              {% endif %}
+            >
+          {% endfor %}
+        </div><!-- /.radios -->
+
+        <div class="products">
+          {% for trial in trial_collection_products %}
+            <div
+              class="product {% if forloop.index == 2 %}selected{% endif %}"
+              data-variant-id="{{ trial.selected_or_first_available_variant.metafields.subscriptions.discount_variant_id }}"
+              data-subscription-id="{{ trial.metafields.subscriptions.subscription_id }}"
+            >
+              <div class="product__inner">
+                <a href="#variant_id_{{ trial.selected_or_first_available_variant.metafields.subscriptions.discount_variant_id }}" class="trial_product__link product__link"></a>
+
+                <div class="product__image">
+                  <img src="{{ trial.featured_image | img_url: '1024x1024' }}" alt="{{ trial.featured_image.alt | escape }}" id="product-image">
+                </div><!-- /.product__image -->
+
+                <div class="product__content">
+                  <h3 class="product__title">{{ trial.title }}</h3>
+
+                  <ul class="list-tags">
+                    {% for tag in trial.tags %}
+                      <li>{{ tag }}</li>
+                    {% endfor %}
+                  </ul><!-- /.list-tags -->
+
+                  <div class="product__ingredients">
+                    <h4>Includes</h4>
+
+                    <ul class="list-ingredients">
+                      <li>2 Vanilla Vegan Protein</li>
+
+                      <li>2 Chocolate Protein Chocolate</li>
+
+                      <li>Neat Shaker</li>
+                    </ul><!-- /.list-ingredients -->
+                  </div><!-- /.product__ingredients -->
+                </div><!-- /.product__content -->
+              </div><!-- /.product__inner -->
+            </div><!-- /.product -->
+          {% endfor %}
+        </div><!-- /.products -->
+      </div><!-- /.section__body -->
+    </div><!-- /.section__inner -->
+
+    <div class="section__actions">
+      <a href="#recharge-step-2" class="btn recharge-step-2">{{ _section.trial_page_btn_text }}</a>
+    </div><!-- /.section__actions -->
+
+    <footer class="section__foot">
+      <p class="error_message">
+        Please select product
+      </p><!-- /.error_message -->
+
+      <div class="rte">
+        {{ _section.trial_page_footer_text }}
+      </div>
+    </footer><!-- /.section__foot -->
+  </div><!-- /.shell -->
+</section><!-- /.section-recharge -->
