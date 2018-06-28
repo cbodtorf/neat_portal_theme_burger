@@ -3,10 +3,62 @@
 		<div class="header__content">
 			<h2>{{ 'customer.misc.welcome' | t }} {{ customer.first_name }}!</h2>
 
-			<a href="#" class="ship-link">
+			{% if customer.metafields.subscriptions.customer_string %}
+			<a href="/tools/portal/customer/{{ customer.metafields.subscriptions.customer_string }}" class="ship-link">
 				Your next box ships
-				<strong>September 31</strong>
+				<strong class="loading-text"></strong>
 			</a>
+			{% endif %}
 		</div><!-- /.header__content -->
 	</div><!-- /.shell -->
 </div><!-- /.header-welcome -->
+
+{% if customer.metafields.subscriptions.customer_string %}
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+		var $shipDate = $('.ship-link strong');
+		var mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		$.ajax({
+			type: 'GET',
+			url: 'https://{{ shop.domain }}/tools/portal/customer/{{ customer.metafields.subscriptions.customer_string }}/next_charge',
+			success: function(res) {
+				console.log(res);
+				var shipDate = new Date(res.response.scheduled_at);
+				$shipDate.text(mL[shipDate.getMonth() + 1] + " " + shipDate.getDate());
+				$shipDate.removeClass('loading-text')
+			},
+			error: function(res) {
+
+			}
+		}).then(function(){
+
+		});
+
+	})
+</script>
+{% endif %}
+
+<style media="screen">
+	.loading-text {
+			height: 0.5rem;
+			margin-top: 5px;
+			padding-bottom: 3px;
+			background-color: #dfe3e8;
+			border-radius: 3px;
+	    animation: polaris-SkeletonShimmerAnimation .8s linear infinite alternate;
+	    -webkit-backface-visibility: hidden;
+	    backface-visibility: hidden;
+	    will-change: opacity
+	}
+
+	@keyframes polaris-SkeletonShimmerAnimation {
+		0% {
+				opacity: .45
+		}
+
+		to {
+				opacity: .9
+		}
+	}
+</style>

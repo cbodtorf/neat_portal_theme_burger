@@ -37,6 +37,7 @@
 	</section><!-- /.section-steps -->
 
 	<form id="trialSubscription">
+		<input class="subscription-form-input" type="hidden" name="_product_handle" value="vegan-whey-trial-box">
 		<input class="subscription-form-input" type="hidden" name="variant_id" value="">
 		<input class="subscription-form-input" type="hidden" name="subscription_id" value="">
 		<input class="subscription-form-input" type="hidden" name="_ongoing_variant_id" value="">
@@ -57,10 +58,19 @@
 		{% include 'trial-flow-page-3' %}
 	</form>
 
+	<div id="hiddenCart" style="display: none;">
+
+	</div>
+
 	<script>
 	  window.addEventListener('load', function() {
       $('[data-id="addSubscriptionToCart"]').click(function(evt){
         evt.preventDefault();
+
+				// double check frequency interval and unit are updated.
+				var $period = $('.period.selected');
+				$('.subscription-form-input[name="shipping_interval_frequency"]').val($period.attr('data-interval-frequency'));
+				$('.subscription-form-input[name="shipping_interval_unit_type"]').val($period.attr('data-interval-unit'));
 
         addItemToCart({
 					"id": $('.subscription-form-input[name="variant_id"]').val(),
@@ -71,27 +81,40 @@
 					"properties[_ongoing_variant_title]": $('.subscription-form-input[name="_ongoing_variant_title"]').val(),
 					"properties[_ongoing_product_title]": $('.subscription-form-input[name="_ongoing_product_title"]').val(),
 					"properties[_ongoing_sku]": $('.subscription-form-input[name="_ongoing_sku"]').val(),
+					"properties[_product_handle]": $('.subscription-form-input[name="_product_handle"]').val(),
 				});
       });
     });
 
 	  function addItemToCart (formJSON) {
-	    console.log('ajax data:', formJSON)
-	    jQuery.ajax({
-	        type: 'POST',
-	        url: '/cart/add.js',
-	        data: formJSON,
-	        dataType: 'json',
-	        success: function() {
-	          $.ajax({
-	            url: '/cart',
-	            success: function success(data) {
-								// Navigate to Checkout.
-	            }
-	          });
-	        }
-	    });
+	    console.log('ajax data:', formJSON);
+			// Clear Cart before adding new trial.
+			jQuery.post('/cart/clear.js').then(function() {
+				jQuery.ajax({
+						type: 'POST',
+						url: '/cart/add.js',
+						data: formJSON,
+						dataType: 'json',
+						success: function() {
+							$.ajax({
+								url: '/cart',
+								success: function success(data) {
+									var $hiddenCart = $('#hiddenCart')
+									var $cart = $(data).find('.main');
+									$hiddenCart.html($cart);
+
+									// TODO: need to wait til Recharge Scripts Load
+									setTimeout(function() {
+										$('#hiddenCart input[name="checkout"]').click();
+									}, 600);
+
+								}
+							});
+						}
+				});
+			});
 	  }
+
 	</script>
 {%- endif -%}
 
@@ -230,19 +253,36 @@
 	],
 	"blocks": [
 		{
-			"type": "accordion",
-			"name": "Accordion",
+			"type": "frequency",
+			"name": "Frequency",
 			"settings": [
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Frequency Image",
+					"info": "recommended size is 400 x 400px"
+				},
 				{
 					"type": "text",
 					"id": "title",
-					"label": "Title"
+					"label": "Title",
+					"default": "Pretty Neat"
 				},
 				{
 					"type": "textarea",
-					"id": "content",
-					"label": "Content",
-					"info": "Use '---' to start a bullet list. All the text before will be regular text. Text after will be bullets with each line is a bullet. Use another '---' for small text after bullets"
+					"id": "frequency_description",
+					"label": "Frequnecy Description",
+					"info": "ie. Delivered every 2 months"
+				},
+				{
+					"type": "range",
+					"id": "frequency_interval",
+					"label": "Subscription Frequency Interval in Weeks",
+					"min": 1,
+					"max": 8,
+					"step": 1,
+					"unit": "wks",
+					"default": 2
 				}
 			]
 		}

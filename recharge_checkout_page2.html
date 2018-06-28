@@ -88,6 +88,7 @@
       var trial = cartJSON.items.filter((el) => {
       	return el.title.includes("trial");
       })[0];
+      console.log('trial', trial)
 
       /**
       * Get data for ongoing subscription
@@ -102,7 +103,7 @@
           url: 'https://neat-nutrition-dev.myshopify.com/products/' + trial.properties._product_handle,
         }).then(function(data) {
           ongoingLabel.textContent = "Ships & Charges on " + subShipsOn.getLongMonth() + " " + subShipsOn.getDate() + nth(subShipsOn.getDate());
-          $content = Checkout.$(data).find("[data-variant-id='"+ trial.properties._ongoing_variant_id +"']");
+          $content = Checkout.$(data).find("[data-sku='"+ trial.properties._ongoing_sku +"']");
           Checkout.$(ongoingProduct).html($content);
           Checkout.$('.order-summary').append(ongoingWrapper);
           Checkout.$('.ongoing-sub .product_info_frequency').append('<span> every '+ freq + ' ' + unit +'</span>');
@@ -186,7 +187,7 @@
   display: inline;
   }
   .icon-svg--color-accent {
-  color: #e6479f;
+  color: #07827e;
   fill: currentColor;
   }
   @keyframes rotate {

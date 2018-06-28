@@ -30,7 +30,7 @@
         <div class="products">
           {% for ongoing in ongoing_collection_products %}
             <div
-              class="product product--alt {% if forloop.index == 2 %}selected {% endif %}product-{{ forloop.index }}"
+              class="product product--ongoing {% if forloop.index == 2 %}selected {% endif %}product-{{ forloop.index }}"
               data-ongoing-product-title="{{ ongoing.title }}"
               data-ongoing-product-id="{{ ongoing.id }}"
             >
@@ -80,7 +80,7 @@
                 {% for variant in ongoing.variants %}
                   {% assign vloop = forloop %}
                   <li
-                    class="variant"
+                    class="variant {% if ploop.index == 2 and vloop.index == 2 %}selected{% endif %}"
                     data-ongoing-variant-id="{{ variant.metafields.subscriptions.discount_variant_id }}"
                     data-ongoing-sku="{{ variant.sku }}"
                     data-ongoing-variant-title="{{ variant.title }}"

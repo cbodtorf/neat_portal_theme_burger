@@ -26,7 +26,7 @@ assets/blogHero.jpg:
 assets/bundle.css.liquid:
   dev_cb: 2018-06-26T15:03:45-04:00   a286c2c8adc827199849e6b26133f3e4
 assets/bundle.js:
-  dev_cb: 2018-06-27T22:20:49-04:00   e6b84ec17d7b148e7a1f7bdaf7c83138
+  dev_cb: 2018-06-28T16:09:37-04:00   5c97ba4b3e1efd4c6ace623ab6da4fff
 assets/bundle.js.map:
   dev_cb: 2018-06-26T15:03:46-04:00   a49b99a6aa59741a5c9c1478f3ced411
 assets/cafe_menu.jpg:
@@ -394,7 +394,7 @@ sections/footer.liquid:
 sections/header.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   a1ebc02763e2c556ec679ff3fdc65221
 sections/mega-menu.liquid:
-  dev_cb: 2018-06-26T15:03:38-04:00   75f68dd47a1f5ab7b2137a1f92c65f35
+  dev_cb: 2018-06-28T17:35:26-04:00   4f927031d7030c0fdf99da3e32294e5d
 sections/section-about.liquid:
   dev_cb: 2018-06-28T09:58:02-04:00   c252f18e4c421422e25c69a88409d3ce
 sections/section-accordions.liquid:
@@ -410,7 +410,7 @@ sections/section-news.liquid:
 sections/section-outro.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   61409004ae13a37b127438490c46f610
 sections/section-trial-flow.liquid:
-  dev_cb: 2018-06-27T22:46:11-04:00   ea0481bbb6a1c46d09166342001d2a7e
+  dev_cb: 2018-06-28T15:55:14-04:00   d1491f6735400531ed229bbe21bfae7f
 sections/template-password.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   a3b3a06a7cd79a42a53fe9d665af0b4a
 snippets/article-item.liquid:
@@ -424,7 +424,7 @@ snippets/cart-text.liquid:
 snippets/collection-sorting.liquid:
   dev_cb: 2018-06-26T15:04:36-04:00   67385a4a7830e632790a974146071b43
 snippets/customer-welcome.liquid:
-  dev_cb: 2018-06-26T15:04:36-04:00   35e42497f8ceb4d283b4d9b703da547a
+  dev_cb: 2018-06-28T17:36:20-04:00   f381ec5e2799162f52b56b9e6622380f
 snippets/footer.liquid:
   dev_cb: 2018-06-26T15:04:36-04:00   f53c6d43f11157dbfdf3f1364de35cf9
 snippets/form-address-body.liquid:
@@ -472,11 +472,11 @@ snippets/subscription-product.liquid:
 snippets/subscription-theme-footer.liquid:
   dev_cb: 2018-06-26T15:14:37-04:00   12b2680357a3f273b47c07d9baf7252f
 snippets/trial-flow-page-1.liquid:
-  dev_cb: 2018-06-27T18:21:38-04:00   09bcd06d1b67dda1ced92308cd293fb6
+  dev_cb: 2018-06-28T14:20:42-04:00   b153c518a0fb7990b387a1499de2580b
 snippets/trial-flow-page-2.liquid:
-  dev_cb: 2018-06-27T22:09:43-04:00   a7720252f95d889130ae959337629f2b
+  dev_cb: 2018-06-28T14:39:52-04:00   44ace8beb8348450f6ab22cab720a503
 snippets/trial-flow-page-3.liquid:
-  dev_cb: 2018-06-27T15:58:49-04:00   3a237f063047c36da04c204db2cb10e9
+  dev_cb: 2018-06-28T14:24:02-04:00   9c92000fd00c27cf326e80fa5a8506dc
 templates/404.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   60236051716d7f7ccf183137d9d5b08b
 templates/article.liquid:
@@ -484,7 +484,7 @@ templates/article.liquid:
 templates/blog.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   07e3c1b6b3eaeb10284a1f816a1d6d49
 templates/cart.liquid:
-  dev_cb: 2018-06-27T22:39:29-04:00   02d6b7cf0fb818384279266221b841b6
+  dev_cb: 2018-06-28T15:34:06-04:00   f30c22bc74552bd7fc8bf63d03cce9e2
 templates/collection.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   92f41bb7e8221a78e1f6c1aab1ba07bf
 templates/customers/account.liquid:
@@ -518,6 +518,6 @@ templates/page.recharge.liquid:
 templates/password.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   35ded8f433ce9b3be7821ce8beff884e
 templates/product.liquid:
-  dev_cb: 2018-06-26T15:04:38-04:00   4982d687273266c1e2e7dc7638bbf5a2
+  dev_cb: 2018-06-28T16:13:23-04:00   db917708c092416931cbd4df902b1761
 templates/search.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   61a79ac401142336bb72631f089c3959

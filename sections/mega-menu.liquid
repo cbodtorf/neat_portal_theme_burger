@@ -28,8 +28,13 @@
 			<nav class="nav-utilities">
 				<ul>
 					{%- if customer -%}
+						{%- if customer.metafields.subscriptions.customer_string -%}
+							{% assign account_url = "/tools/portal/customer/" | append: customer.metafields.subscriptions.customer_string %}
+						{%- else -%}
+							{% assign account_url = "/account" -%}
+						{%- endif -%}
 						<li>
-							<a href="/account">
+							<a href="{{ account_url }}">
 								{{ 'customer.account.title' | t }}
 							</a>
 						</li>
@@ -42,7 +47,7 @@
 					{%- endif -%}
 
 					<li>
-						<a href="#" class="cart-link">
+						<a href="/cart" class="cart-link">
 							{{ 'layout.cart.title' | t }} <span>{{ cart.item_count }}</span>
 						</a>
 					</li>

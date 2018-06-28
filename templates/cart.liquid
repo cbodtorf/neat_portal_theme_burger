@@ -5,7 +5,7 @@
 		<div class="form-head">
 			<h1>{{ 'cart.general.title' | t }}</h1>
 		</div><!-- /.form-head -->
-		
+
 		<div class="form-body">
 			<div class="table table-cart">
 				<div class="table">
@@ -21,7 +21,7 @@
 								<th class="cart-total" colspan="2" >{{ 'cart.label.total' | t }}</th>
 							</tr>
 						</thead>
-						
+
 						<tbody>
 							{% for product in cart.items %}
 								<tr>
@@ -127,7 +127,11 @@
 		<div class="form-action">
 			<input type="submit" name="update" class="btn btn-update" value="{{ 'cart.general.update' | t }}">
 
-			<input type="submit" name="checkout" class="btn btn-checkout" value="{{ 'cart.general.checkout' | t }}">
+			<input
+				type="submit" name="checkout"
+				class="btn btn-checkout"
+				value="{{ 'cart.general.checkout' | t }}"
+			>
 
 			{% if additional_checkout_buttons %}
 				<div class="cart-additional-buttons">
@@ -145,3 +149,9 @@
 		<p>{{ 'cart.general.continue_browsing_html' | t }}</p>
 	</div><!-- /.cart-empty -->
 {% endif %}
+
+<script type="text/javascript">
+	if (window.location.hash === '#express_checkout') {
+		// document.querySelector('input[name="checkout"]').click();
+	}
+</script>

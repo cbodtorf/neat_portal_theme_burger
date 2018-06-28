@@ -13,86 +13,57 @@
 
       <div class="section__body">
         <div class="radios">
-          <input type="radio" name="recharge-period" id="period-1">
-          <input type="radio" name="recharge-period" id="period-2" checked>
-          <input type="radio" name="recharge-period" id="period-3">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'frequency' %}
+                {% assign freq = block.settings %}
+                <input
+                  type="radio"
+                  name="recharge-period"
+                  id="period-{{ freq.frequency_interval }}"
+                  {% if forloop.index == 2 %}
+                  checked
+                  {% endif %}
+                >
+            {% endcase %}
+          {% endfor %}
         </div><!-- /.radios -->
 
         <div class="periods">
-          <div class="period">
-            <div class="period__inner">
-              <a href="#period-1" class="period__link"></a>
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'frequency' %}
+                {% assign freq = block.settings %}
+                <div
+                  class="period {% if forloop.index == 2 %}selected{% endif %}"
+                  data-interval-frequency="{{ freq.frequency_interval }}"
+                  data-interval-unit="weeks"
+                >
+                  <div class="period__inner">
+                    <a href="#period-1" class="period__link"></a>
 
-              <div class="period__image">
-                <img src="{{ 'period-image-1.png' | asset_url }}" alt="" class="hidden-xs">
-                <img src="{{ 'period-1-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
-              </div><!-- /.period__image -->
+                    <div class="period__image">
+                      <img src="{{ freq.image | img_url: '300x' }}" alt="" class="hidden-xs">
+                      <img src="{{ freq.image | img_url: '300x' }}" alt="" class="visible-xs-block">
+                    </div><!-- /.period__image -->
 
-              <div class="period__info">
-                <div class="period__title">
-                  <h3>
-                    Pretty neat
-                  </h3>
-                </div><!-- /.period__title -->
+                    <div class="period__info">
+                      <div class="period__title">
+                        <h3>
+                          {{ freq.title }}
+                        </h3>
+                      </div><!-- /.period__title -->
 
-                <div class="period__content">
-                  <p>
-                    Delivered every 2 months
-                  </p>
-                </div><!-- /.period__content -->
-              </div><!-- /.period__info -->
-            </div><!-- /.period__inner -->
-          </div><!-- /.period -->
-
-          <div class="period selected">
-            <div class="period__inner">
-              <a href="#period-2" class="period__link"></a>
-
-              <div class="period__image">
-                <img src="{{ 'period-image-2.png' | asset_url }}" alt="" class="hidden-xs">
-                <img src="{{ 'period-2-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
-              </div><!-- /.period__image -->
-
-              <div class="period__info">
-                <div class="period__title">
-                  <h3>
-                    Very neat
-                  </h3>
-                </div><!-- /.period__title -->
-
-                <div class="period__content">
-                  <p>
-                    Delivered every month
-                  </p>
-                </div><!-- /.period__content -->
-              </div><!-- /.period__info -->
-            </div><!-- /.period__inner -->
-          </div><!-- /.period -->
-
-          <div class="period">
-            <div class="period__inner">
-              <a href="#period-3" class="period__link"></a>
-
-              <div class="period__image">
-                <img src="{{ 'period-image-3.png' | asset_url }}" alt="" class="hidden-xs">
-                <img src="{{ 'period-3-mobile-retina.png' | asset_url }}" alt="" class="visible-xs-block">
-              </div><!-- /.period__image -->
-
-              <div class="period__info">
-                <div class="period__title">
-                  <h3>
-                    Super neat
-                  </h3>
-                </div><!-- /.period__title -->
-
-                <div class="period__content">
-                  <p>
-                    Delivered every 2 weeks
-                  </p>
-                </div><!-- /.period__content -->
-              </div><!-- /.period__info -->
-            </div><!-- /.period__inner -->
-          </div><!-- /.period -->
+                      <div class="period__content">
+                        <p>
+                          {{ freq.frequency_description }}
+                        </p>
+                      </div><!-- /.period__content -->
+                    </div><!-- /.period__info -->
+                  </div><!-- /.period__inner -->
+                </div><!-- /.period -->
+            {% endcase %}
+          {% endfor %}
         </div><!-- /.periods -->
       </div><!-- /.section__body -->
     </div><!-- /.section__inner -->

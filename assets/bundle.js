@@ -12337,7 +12337,7 @@ $('.trial_product__link').on('click', function (event) {
 
 	$($this.attr('href')).trigger('click');
  	$('.subscription-form-input[name="variant_id"]').val($product.attr('data-variant-id'));
-  	$('.subscription-form-input[name="subscription_id"]').val($product.attr('data-subscription-id'));
+	$('.subscription-form-input[name="subscription_id"]').val($product.attr('data-subscription-id'));
 });
 
 $('.ongoing_product__link').on('click', function (event) {
@@ -12347,9 +12347,10 @@ $('.ongoing_product__link').on('click', function (event) {
 	var $product = $this.closest('.product');
 	var $productVariantSelector = $('.product-variant-selector.product-id-' + $product.attr('data-ongoing-product-id'));
 
-  	$productVariantSelector.addClass('selected').siblings().removeClass('selected');
+	$productVariantSelector.addClass('selected').siblings().removeClass('selected');
 	$product.addClass('selected').siblings().removeClass('selected');
 
+	$productVariantSelector.find('.variant').eq(1).addClass('selected').siblings().removeClass('selected');
 	$productVariantSelector.find('.variant-field-radio').eq(1).trigger('click');
 	$($this.attr('href')).trigger('click');
  	$('.subscription-form-input[name="_ongoing_product_title"]').val($product.attr('data-ongoing-product-title'));
@@ -12359,7 +12360,8 @@ $('.variant-field-radio').on('change', function (event) {
 	event.preventDefault();
 	var $this = $(this);
 	var $variant = $this.closest('.variant');
-
+  $('.variant').removeClass('selected');
+  $variant.addClass('selected');
 	$('.subscription-form-input[name="_ongoing_variant_id"]').val($variant.attr('data-ongoing-variant-id'));
 	$('.subscription-form-input[name="_ongoing_sku"]').val($variant.attr('data-ongoing-sku'));
 	$('.subscription-form-input[name="_ongoing_variant_title"]').val($variant.attr('data-ongoing-variant-title'));
@@ -12374,12 +12376,18 @@ $('.period__link').on('click', function (event) {
 	$period.addClass('selected').siblings().removeClass('selected');
 
 	$($this.attr('href')).trigger('click');
+  $('.subscription-form-input[name="shipping_interval_frequency"]').val($period.attr('data-interval-frequency'));
+  $('.subscription-form-input[name="shipping_interval_unit_type"]').val($period.attr('data-interval-unit'));
 });
 
 $('.recharge-step-2').on('click', function (event) {
 	event.preventDefault();
 
 	if (rechargeNextSection($(this))) {
+    var $product = $('.product--trial.selected');
+    $('.subscription-form-input[name="variant_id"]').val($product.attr('data-variant-id'));
+    $('.subscription-form-input[name="subscription_id"]').val($product.attr('data-subscription-id'));
+
 		$('.section-steps .step-2').addClass('active');
 
 		scrollToTop();
@@ -12390,6 +12398,15 @@ $('.recharge-step-3').on('click', function (event) {
 	event.preventDefault();
 
 	if (rechargeNextSection($(this))) {
+
+    var $product = $('.product--ongoing.selected');
+    $('.subscription-form-input[name="_ongoing_product_title"]').val($product.attr('data-ongoing-product-title'));
+
+    var $variant = $('.variant.selected');
+    $('.subscription-form-input[name="_ongoing_variant_id"]').val($variant.attr('data-ongoing-variant-id'));
+    $('.subscription-form-input[name="_ongoing_sku"]').val($variant.attr('data-ongoing-sku'));
+    $('.subscription-form-input[name="_ongoing_variant_title"]').val($variant.attr('data-ongoing-variant-title'));
+    console.log('v', $variant)
 		$('.section-steps .step-3').addClass('active');
 		scrollToTop();
 	}

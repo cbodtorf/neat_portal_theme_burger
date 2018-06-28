@@ -30,7 +30,7 @@
         <div class="products">
           {% for trial in trial_collection_products %}
             <div
-              class="product {% if forloop.index == 2 %}selected{% endif %}"
+              class="product product--trial {% if forloop.index == 2 %}selected{% endif %}"
               data-variant-id="{{ trial.selected_or_first_available_variant.metafields.subscriptions.discount_variant_id }}"
               data-subscription-id="{{ trial.metafields.subscriptions.subscription_id }}"
             >
