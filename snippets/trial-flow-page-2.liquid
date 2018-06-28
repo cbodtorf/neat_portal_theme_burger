@@ -65,11 +65,20 @@
           <header class="variants__head">
             <h2><span>Choose Your Flavor</span></h2>
           </header><!-- /.variants__head -->
-
+          <style>
+            .variants .product-variant-selector {
+              display: none;
+            }
+            .variants .product-variant-selector.selected {
+              display: flex;
+            }
+          </style>
           <div class="product-variant-selectors">
             {% for ongoing in ongoing_collection_products %}
-              <ul class="product-variant-selector product-id-{{ ongoing.id }}">
+              {% assign ploop = forloop %}
+              <ul class="product-variant-selector product-id-{{ ongoing.id }} {% if ploop.index == 2 %}selected{% endif %}">
                 {% for variant in ongoing.variants %}
+                  {% assign vloop = forloop %}
                   <li
                     class="variant"
                     data-ongoing-variant-id="{{ variant.metafields.subscriptions.discount_variant_id }}"
@@ -77,12 +86,27 @@
                     data-ongoing-variant-title="{{ variant.title }}"
                   >
                     <div class="radio">
-                      <input type="radio" name="field-radio" id="variant-vanilla">
+                      <input
+                        type="radio"
+                        class="variant-field-radio"
+                        name="field-radio"
+                        id="variant-{{ variant.id }}"
+                        {% if ploop.index == 2 and vloop.index == 2 %}
+                        checked
+                        {% endif %}
+                      >
 
-                      <label for="variant-vanilla" class="form__label">
-                        <span style="background-image: url({{ 'variant-1-image-retina.png' | asset_url }})"></span>
-
-                        Vanilla
+                      <label for="variant-{{ variant.id }}" class="form__label">
+                        <span style="background-image: url({{ variant.image | img_url }})"></span>
+                        {% if variant.title contains 'Chocolate' and variant.title contains 'Vanilla' %}
+                          Mixed
+                        {% elsif variant.title contains 'Chocolate' %}
+                          Chocolate
+                        {% elsif variant.title contains 'Vanilla' %}
+                          Vanilla
+                        {% else %}
+                          {{ variant.title }}
+                        {% endif %}
                       </label>
                     </div><!-- /.radio -->
                   </li>
@@ -90,44 +114,6 @@
               </ul>
             {% endfor %}
           </div>
-
-          <ul>
-            <li class="variant">
-              <div class="radio">
-                <input type="radio" name="field-radio" id="variant-vanilla">
-
-                <label for="variant-vanilla" class="form__label">
-                  <span style="background-image: url({{ 'variant-1-image-retina.png' | asset_url }})"></span>
-
-                  Vanilla
-                </label>
-              </div><!-- /.radio -->
-            </li>
-
-            <li class="variant">
-              <div class="radio">
-                <input type="radio" name="field-radio" id="variant-chocolate" checked>
-
-                <label for="variant-chocolate" class="form__label">
-                  <span style="background-image: url({{ 'variant-2-image-retina.png' | asset_url }})"></span>
-
-                  Chocolate
-                </label>
-              </div><!-- /.radio -->
-            </li>
-
-            <li class="variant">
-              <div class="radio">
-                <input type="radio" name="field-radio" id="variant-mixed">
-
-                <label for="variant-mixed" class="form__label">
-                  <span style="background-image: url({{ 'variant-3-image-retina.png' | asset_url }})"></span>
-
-                  Mixed
-                </label>
-              </div><!-- /.radio -->
-            </li>
-          </ul>
         </div><!-- /.variants -->
       </div><!-- /.section__body -->
     </div><!-- /.section__inner -->

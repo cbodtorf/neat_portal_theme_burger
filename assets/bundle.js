@@ -12336,8 +12336,8 @@ $('.trial_product__link').on('click', function (event) {
 	$product.addClass('selected').siblings().removeClass('selected');
 
 	$($this.attr('href')).trigger('click');
-  $('.subscription-form-input[name="variant_id"]').val($product.attr('data-variant-id'));
-  $('.subscription-form-input[name="subscription_id"]').val($product.attr('data-subscription-id'));
+ 	$('.subscription-form-input[name="variant_id"]').val($product.attr('data-variant-id'));
+  	$('.subscription-form-input[name="subscription_id"]').val($product.attr('data-subscription-id'));
 });
 
 $('.ongoing_product__link').on('click', function (event) {
@@ -12345,17 +12345,24 @@ $('.ongoing_product__link').on('click', function (event) {
 
 	var $this = $(this);
 	var $product = $this.closest('.product');
-  console.log($product);
-	var $productVariantSelector = $('.product-variant-selector .product-id-' + $product.attr('data-ongoing-id'));
+	var $productVariantSelector = $('.product-variant-selector.product-id-' + $product.attr('data-ongoing-product-id'));
 
-  $productVariantSelector.addClass('selected').siblings().removeClass('selected');
+  	$productVariantSelector.addClass('selected').siblings().removeClass('selected');
 	$product.addClass('selected').siblings().removeClass('selected');
 
+	$productVariantSelector.find('.variant-field-radio').eq(1).trigger('click');
 	$($this.attr('href')).trigger('click');
-  $('.subscription-form-input[name="_ongoing_product_title"]').val($product.attr('data-ongoing-product-title'));
-  // $('.subscription-form-input[name="_ongoing_variant_id"]').val($product.attr('data-ongoing-variant-id'));
-  // $('.subscription-form-input[name="_ongoing_sku"]').val($product.attr('data-ongoing-sku'));
-  // $('.subscription-form-input[name="_ongoing_variant_title"]').val($product.attr('data-ongoing-variant-title'));
+ 	$('.subscription-form-input[name="_ongoing_product_title"]').val($product.attr('data-ongoing-product-title'));
+});
+
+$('.variant-field-radio').on('change', function (event) {
+	event.preventDefault();
+	var $this = $(this);
+	var $variant = $this.closest('.variant');
+
+	$('.subscription-form-input[name="_ongoing_variant_id"]').val($variant.attr('data-ongoing-variant-id'));
+	$('.subscription-form-input[name="_ongoing_sku"]').val($variant.attr('data-ongoing-sku'));
+	$('.subscription-form-input[name="_ongoing_variant_title"]').val($variant.attr('data-ongoing-variant-title'));
 });
 
 $('.period__link').on('click', function (event) {
