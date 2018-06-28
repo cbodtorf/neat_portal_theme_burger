@@ -395,6 +395,8 @@ sections/header.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   a1ebc02763e2c556ec679ff3fdc65221
 sections/mega-menu.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   75f68dd47a1f5ab7b2137a1f92c65f35
+sections/section-about.liquid:
+  dev_cb: 2018-06-28T09:58:02-04:00   c252f18e4c421422e25c69a88409d3ce
 sections/section-accordions.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   16a78aba0c65529397c1b320b17efac0
 sections/section-featured-blog.liquid:
@@ -449,6 +451,14 @@ snippets/recharge-header.liquid:
   dev_cb: 2018-06-26T15:04:36-04:00   24c37221ae34232a8fd4d5e9589284c2
 snippets/related-products.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   dead64ee88bcd97efba07790fe15c0b8
+snippets/section-page-banner.liquid:
+  dev_cb: 2018-06-28T09:46:29-04:00   e33bb83b2c3928c3778376ca5af16453
+snippets/section-page-columns.liquid:
+  dev_cb: 2018-06-28T09:46:28-04:00   77b9929aca0fb63032f034b0bf38be3a
+snippets/section-page-hero.liquid:
+  dev_cb: 2018-06-28T09:46:26-04:00   5c46a20b3975112652660ad9c7024dc6
+snippets/section-page-paragraph.liquid:
+  dev_cb: 2018-06-28T09:46:24-04:00   2e43d4c7dd2a1ba42dee2e60d183d5b5
 snippets/settings.liquid:
   dev_cb: 2018-06-26T15:15:46-04:00   ea03dd7c36ea1e27de021341c785f406
 snippets/social-meta-tags.liquid:
@@ -497,6 +507,8 @@ templates/index.liquid:
   dev_cb: 2018-06-26T15:04:37-04:00   b1dfac8c369520b2d32269ccaead64a0
 templates/list-collections.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   374f24f194c610a7374846ef865fceb0
+templates/page.about.liquid:
+  dev_cb: 2018-06-28T09:46:19-04:00   6b31f5b566c9bf5dc7b3ee22d059d2f8
 templates/page.contact.liquid:
   dev_cb: 2018-06-26T15:04:38-04:00   0209a33233ed355fcb77e3348ae5e9a0
 templates/page.liquid:

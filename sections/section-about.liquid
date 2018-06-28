@@ -19,7 +19,7 @@
       {% include 'section-page-paragraph' _section: block.settings %}
     {% when 'columns' %}
       {% include 'section-page-columns' _section: block.settings %}
-    {% when 'outro' %}
+    {% when 'banner' %}
       {% include 'section-page-banner' _section: block.settings %}
     {% endcase %}
   {% endfor %}
@@ -43,159 +43,57 @@
           }
         ],
         "blocks": [
-            {
-              "type": "hero",
-              "name": "Hero",
-              "settings": [
-          		{
-          			"type": "image_picker",
-          			"id": "image",
-          			"label": "Image",
-          			"info": "Recommended width: 2048px."
-          		},
-          		{
-          			"type": "textarea",
-          			"id": "title",
-          			"label": "Title"
-          		},
-          		{
-          			"type": "textarea",
-          			"id": "description",
-          			"label": "Description"
-          		},
-          		{
-          			"type": "textarea",
-          			"id": "mobile_description",
-          			"label": "Mobile Description"
-          		},
-          		{
-          			"type": "text",
-          			"id": "button_label",
-          			"label": "Button Label"
-          		},
-          		{
-          			"type": "url",
-          			"id": "button_link",
-          			"label": "Button Link"
-          		},
-          		{
-          			"type": "select",
-          			"id": "content_position",
-          			"label": "Content Position",
-          			"options": [
-          		      {
-          		        "value": "left",
-          		        "label": "Left"
-          		      },
-          		      {
-          		        "value": "right",
-          		        "label": "Right"
-          		      }
-          		    ],
-          		    "default":   "left"
-          		}
-              ]
-            },
-            {
-              "type": "text-image",
-              "name": "Info",
-              "settings": [
-                  {
-                      "type": "select",
-                      "id": "img_placement",
-                      "label": "Image Placement",
-                      "options": [
-                        { "value": "img_left", "label": "Image Left"},
-                        { "value": "img_right", "label": "Image Right"}
-                      ],
-                      "default": "img_right"
-                  },
-                  {
-                      "type": "image_picker",
-                      "id": "image",
-                      "label": "Image",
-                      "info": "751 x 731px recommended"
-                  },
-                  {
-                      "type": "text",
-                      "id": "title",
-                      "label": "Heading",
-                      "default": "The Story"
-                  },
-                  {
-                      "type": "richtext",
-                      "id": "entry",
-                      "label": "Text"
-                  },
-                  {
-                      "type": "text",
-                      "id": "btn_text",
-                      "label": "Button Text",
-                      "default": "Find a Gigi’s"
-                  },
-                  {
-                      "type": "url",
-                      "id": "btn_link",
-                      "label": "Button Link"
-                  }
-              ]
-            },
-            {
-              "type": "text-text",
-              "name": "Double Text",
-              "settings": [
-                  {
-                    "type": "header",
-                    "content": "Text Block 1"
-                  },
-                  {
-                      "type": "text",
-                      "id": "title_1",
-                      "label": "Heading",
-                      "default": "The Story"
-                  },
-                  {
-                      "type": "richtext",
-                      "id": "entry_1",
-                      "label": "Text"
-                  },
-                  {
-                      "type": "text",
-                      "id": "btn_text_1",
-                      "label": "Button Text",
-                      "default": "Find a Gigi’s"
-                  },
-                  {
-                      "type": "url",
-                      "id": "btn_link_1",
-                      "label": "Button Link"
-                  },
-                  {
-                    "type": "header",
-                    "content": "Text Block 2"
-                  },
-                  {
-                      "type": "text",
-                      "id": "title_2",
-                      "label": "Heading",
-                      "default": "The Story"
-                  },
-                  {
-                      "type": "richtext",
-                      "id": "entry_2",
-                      "label": "Text"
-                  },
-                  {
-                      "type": "text",
-                      "id": "btn_text_2",
-                      "label": "Button Text",
-                      "default": "Find a Gigi’s"
-                  },
-                  {
-                      "type": "url",
-                      "id": "btn_link_2",
-                      "label": "Button Link"
-                  }
+                {
+                  "type": "hero",
+                  "name": "Hero",
+                  "settings": [
+            		{
+            			"type": "image_picker",
+            			"id": "image",
+            			"label": "Image",
+            			"info": "Recommended width: 2048px."
+            		},
+            		{
+            			"type": "textarea",
+            			"id": "title",
+            			"label": "Title"
+            		},
+            		{
+            			"type": "textarea",
+            			"id": "description",
+            			"label": "Description"
+            		},
+            		{
+            			"type": "textarea",
+            			"id": "mobile_description",
+            			"label": "Mobile Description"
+            		},
+            		{
+            			"type": "text",
+            			"id": "button_label",
+            			"label": "Button Label"
+            		},
+            		{
+            			"type": "url",
+            			"id": "button_link",
+            			"label": "Button Link"
+            		},
+            		{
+            			"type": "select",
+            			"id": "content_position",
+            			"label": "Content Position",
+            			"options": [
+            		      {
+            		        "value": "left",
+            		        "label": "Left"
+            		      },
+            		      {
+            		        "value": "right",
+            		        "label": "Right"
+            		      }
+            		    ],
+            		    "default":   "left"
+            		}
               ]
             },
             {
@@ -268,7 +166,7 @@
           					"id": "image_col_1",
           					"label": "Image",
           					"info": "Recommended height: 260px."
-          				}
+          				},
                   {
                       "type": "header",
                       "content": "Column 2"
@@ -288,7 +186,7 @@
           					"id": "image_col_2",
           					"label": "Image",
           					"info": "Recommended height: 260px."
-          				}
+          				},
                   {
                       "type": "header",
                       "content": "Column 3"
