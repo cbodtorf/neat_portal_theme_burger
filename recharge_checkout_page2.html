@@ -100,7 +100,7 @@
 
         Checkout.$.ajax({
           method: 'GET',
-          url: 'https://neat-nutrition-dev.myshopify.com/products/' + trial.properties._product_handle,
+          url: 'https://neat-nutrition-dev.myshopify.com/products/' + trial.handle.split('-1')[0],
         }).then(function(data) {
           ongoingLabel.textContent = "Ships & Charges on " + subShipsOn.getLongMonth() + " " + subShipsOn.getDate() + nth(subShipsOn.getDate());
           $content = Checkout.$(data).find("[data-sku='"+ trial.properties._ongoing_sku +"']");

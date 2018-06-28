@@ -410,7 +410,7 @@ sections/section-news.liquid:
 sections/section-outro.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   61409004ae13a37b127438490c46f610
 sections/section-trial-flow.liquid:
-  dev_cb: 2018-06-28T15:55:14-04:00   d1491f6735400531ed229bbe21bfae7f
+  dev_cb: 2018-06-28T17:51:06-04:00   1837723a44390172d8dcd02bab06bacf
 sections/template-password.liquid:
   dev_cb: 2018-06-26T15:03:38-04:00   a3b3a06a7cd79a42a53fe9d665af0b4a
 snippets/article-item.liquid:
