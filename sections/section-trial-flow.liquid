@@ -40,6 +40,9 @@
 		<input class="subscription-form-input" type="hidden" name="variant_id" value="">
 		<input class="subscription-form-input" type="hidden" name="subscription_id" value="">
 		<input class="subscription-form-input" type="hidden" name="_ongoing_variant_id" value="">
+		<input class="subscription-form-input" type="hidden" name="_ongoing_product_title" value="">
+		<input class="subscription-form-input" type="hidden" name="_ongoing_variant_title" value="">
+		<input class="subscription-form-input" type="hidden" name="_ongoing_sku" value="">
 		<input class="subscription-form-input" type="hidden" name="quantity" value="1">
 		<input class="subscription-form-input" type="hidden" name="shipping_interval_frequency" value="4">
 		<input class="subscription-form-input" type="hidden" name="shipping_interval_unit_type" value="weeks">
@@ -59,33 +62,35 @@
       $('[data-id="addSubscriptionToCart"]').click(function(evt){
         evt.preventDefault();
 
-        console.log('click event data:', formData)
         addItemToCart({
 					"id": $('.subscription-form-input[name="variant_id"]').val(),
 					"quantity": $('.subscription-form-input[name="quantity"]').val(),
 					"properties[shipping_interval_frequency]": $('.subscription-form-input[name="shipping_interval_frequency"]').val(),
 					"properties[shipping_interval_unit_type]": $('.subscription-form-input[name="shipping_interval_unit_type"]').val(),
-					"properties[subscription_id]": $('.subscription-form-input[name="subscription_id"]').val()
+					"properties[subscription_id]": $('.subscription-form-input[name="subscription_id"]').val(),
+					"properties[_ongoing_variant_title]": $('.subscription-form-input[name="_ongoing_variant_title"]').val(),
+					"properties[_ongoing_product_title]": $('.subscription-form-input[name="_ongoing_product_title"]').val(),
+					"properties[_ongoing_sku]": $('.subscription-form-input[name="_ongoing_sku"]').val(),
 				});
       });
     });
 
 	  function addItemToCart (formJSON) {
 	    console.log('ajax data:', formJSON)
-	    // jQuery.ajax({
-	    //     type: 'POST',
-	    //     url: '/cart/add.js',
-	    //     data: formJSON,
-	    //     dataType: 'json',
-	    //     success: function() {
-	    //       $.ajax({
-	    //         url: '/cart',
-	    //         success: function success(data) {
-			// 					// Navigate to Checkout.
-	    //         }
-	    //       });
-	    //     }
-	    // });
+	    jQuery.ajax({
+	        type: 'POST',
+	        url: '/cart/add.js',
+	        data: formJSON,
+	        dataType: 'json',
+	        success: function() {
+	          $.ajax({
+	            url: '/cart',
+	            success: function success(data) {
+								// Navigate to Checkout.
+	            }
+	          });
+	        }
+	    });
 	  }
 	</script>
 {%- endif -%}
