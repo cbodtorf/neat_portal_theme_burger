@@ -1,0 +1,39 @@
+{%- if _section.image != blank -%}
+	<div class="intro" style="background-image: url('{{ _section.image | img_url: '2048x' }}')">
+		<div class="shell">
+			{%- if _section.content_position == 'right' -%}
+				{%- assign position_class = 'intro__inner--right' -%}
+			{%- else -%}
+				{%- assign position_class = '' -%}
+			{%- endif -%}
+
+			<div class="intro__inner {{ position_class }}">
+				<div class="intro__content intro__content--large">
+					{%- if _section.title != blank -%}
+						<h2>{{ _section.title | newline_to_br }}</h2>
+					{%- endif -%}
+
+					{%- if _section.description != blank -%}
+						<p class="hidden-xs">
+							{{ _section.description }}
+						</p>
+					{%- endif -%}
+
+					{%- if _section.mobile_description != blank -%}
+						<p class="visible-xs-block">
+							{{ _section.mobile_description }}
+						</p>
+					{%- elsif _section.description != blank -%}
+						<p class="visible-xs-block">
+							{{ _section.description | truncatewords: 20 }}
+						</p>
+					{%- endif -%}
+
+					{%- if _section.button_label != blank and _section.button_link != blank -%}
+						<a href="{{ _section.button_link }}" class="btn btn--alt">{{ _section.button_label }}</a>
+					{%- endif -%}
+				</div><!-- /.intro__content -->
+			</div><!-- /.intro__inner intro__inner-/-right -->
+		</div><!-- /.shell -->
+	</div><!-- /.intro -->
+{%- endif -%}

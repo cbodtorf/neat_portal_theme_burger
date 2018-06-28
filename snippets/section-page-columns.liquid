@@ -1,0 +1,89 @@
+<section class="section-features">
+  <div class="shell">
+    <div class="section__inner">
+      {%- if _section.title != blank -%}
+        <div class="section__head">
+          <h2>{{ _section.title }}</h2>
+        </div><!-- /.section__head -->
+      {%- endif -%}
+
+      <div class="section__body">
+        <ul class="features">
+          {%- for block in _blocks -%}
+            {%- assign _block = block.settings -%}
+          {%- endfor -%}
+
+          <!-- COLUMN 1 -->
+          {%- if _section.title_col_1 != blank and _section.image_col_1 != blank -%}
+            <li class="feature">
+              {%- if _section.image_col_1 != blank -%}
+                <div class="feature__image">
+                  {{ _section.image_col_1 | img_url: '300x' | img_tag }}
+                </div><!-- /.feature__image -->
+              {%- endif -%}
+
+              {%- if _section.title_col_1 != blank or _section.content_col_1 != blank -%}
+                <div class="feature__content">
+                  {%- if _section.title_col_1 != blank -%}
+                    <h3>{{ _section.title_col_1 }}</h3>
+                  {%- endif -%}
+
+                  {%- if _section.content_col_1 != blank -%}
+                    <p>{{ _section.content_col_1 }}</p>
+                  {%- endif -%}
+                </div><!-- /.feature__content -->
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+
+          <!-- COLUMN 2 -->
+          {%- if _section.title_col_2 != blank and _section.image_col_2 != blank -%}
+            <li class="feature">
+              {%- if _section.image_col_2 != blank -%}
+                <div class="feature__image">
+                  {{ _section.image_col_2 | img_url: '300x' | img_tag }}
+                </div><!-- /.feature__image -->
+              {%- endif -%}
+
+              {%- if _section.title_col_2 != blank or _section.content_col_2 != blank -%}
+                <div class="feature__content">
+                  {%- if _section.title_col_2 != blank -%}
+                    <h3>{{ _section.title_col_2 }}</h3>
+                  {%- endif -%}
+
+                  {%- if _section.content_col_2 != blank -%}
+                    <p>{{ _section.content_col_2 }}</p>
+                  {%- endif -%}
+                </div><!-- /.feature__content -->
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+
+          <!-- COLUMN 3 -->
+          {%- if _section.title_col_3 != blank and _section.image_col_3 != blank -%}
+            <li class="feature">
+              {%- if _section.image_col_3 != blank -%}
+                <div class="feature__image">
+                  {{ _section.image_col_3 | img_url: '300x' | img_tag }}
+                </div><!-- /.feature__image -->
+              {%- endif -%}
+
+              {%- if _section.title_col_3 != blank or _section.content_col_3 != blank -%}
+                <div class="feature__content">
+                  {%- if _section.title_col_3 != blank -%}
+                    <h3>{{ _section.title_col_3 }}</h3>
+                  {%- endif -%}
+
+                  {%- if _section.content_col_3 != blank -%}
+                    <p>{{ _section.content_col_3 }}</p>
+                  {%- endif -%}
+                </div><!-- /.feature__content -->
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+
+        </ul><!-- /.features -->
+      </div><!-- /.section__body -->
+    </div><!-- /.section__inner -->
+  </div><!-- /.shell -->
+</section><!-- /.section-features -->
